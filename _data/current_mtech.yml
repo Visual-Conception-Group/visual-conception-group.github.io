@@ -8,12 +8,12 @@
 #  education3:
 #  education4:
 
-- name: Abu Osama Siddiqui
-  photo: 
-  info: Master student
-  email: osama22006@iiitd.ac.in
+- name: Vinay Kumar Verma
+  photo: VinayVerma.png
+  info: MTech Research
+  email: vinay24002@iiitd.ac.in
   number_educ: 1
-  education1: "Topic: "
+  education1: "Minor Thesis: Gaussian Enhanced Network for Efficient Segmentation via Intelligent Sampling"
 
 
 
