@@ -2,3 +2,6 @@
 _site/
 vendor/
 .bundle/
+.DS_Store
+_sass/.DS_Store
+images/.DS_Store
