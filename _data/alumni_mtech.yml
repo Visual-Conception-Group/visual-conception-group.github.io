@@ -1,6 +1,13 @@
 # - name: Dibyendu Roy
 #   thesis: 
 
+- name: <a href="https://www.linkedin.com/in/vermavinay982/">Vinay Kumar Verma</a>
+  # photo: VinayVerma.png
+  # info: MTech Research
+  # email: vinay24002@iiitd.ac.in
+  # number_educ: 1
+  thesis: "Gaussian Enhanced Network for Efficient Segmentation via Intelligent Sampling"
+
 - name: <a href="https://in.linkedin.com/in/abu-osama-siddiqui">Abu Osama Siddiqui</a>
   thesis: "Optimal Transport Guided Contrastive Video Summarization"
 
