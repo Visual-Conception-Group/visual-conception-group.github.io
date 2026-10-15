@@ -1,0 +1,20 @@
+{%- comment -%}
+  Highlights lab members in an author list.
+  Usage: {% include authors.html authors=pub.authors %}
+  Names and their other spellings (aliases) come from _data/people.yml. Each author in the list
+  is compared to them exactly, so "Ansh Arora" never matches inside "Vansh Arora".
+  Separators (", ", " and ", ", and ") are swapped for markers, the list is split on "¦",
+  and the markers are turned back into text afterwards.
+{%- endcomment -%}
+{%- assign lab_names = "" | split: "" -%}
+{%- for person in site.data.people -%}
+  {%- assign lab_names = lab_names | push: person.name -%}
+  {%- for alias in person.aliases -%}{%- assign lab_names = lab_names | push: alias -%}{%- endfor -%}
+{%- endfor -%}
+{%- assign parts = include.authors | replace: ", and ", "¦#CA#¦" | replace: ", ", "¦#C#¦" | replace: " and ", "¦#A#¦" | split: "¦" -%}
+{%- for part in parts -%}
+  {%- if part == "#CA#" -%}, and {% elsif part == "#C#" -%}, {% elsif part == "#A#" %} and {% else -%}
+    {%- assign bare = part | remove: "*" | strip -%}
+    {%- if lab_names contains bare -%}<span class="lab-author">{{ part | escape }}</span>{%- else -%}{{ part | escape }}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

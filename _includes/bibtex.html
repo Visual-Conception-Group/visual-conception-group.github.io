@@ -1,0 +1,64 @@
+{%- comment -%}
+  BibTeX for one publication. Uses the paper's own `bibtex:` field when it has one;
+  otherwise builds an entry from title, authors, venue, year and links.
+  The citation key is `bibkey:` if set, else last name + year + first title word; a key that
+  was already used on the same page gets "b", "c", ... appended so keys stay unique.
+  Usage: {% include bibtex.html pub=p %}
+  (Curly braces are printed from the lb/rb variables: typing three braces in a row would break Liquid.)
+{%- endcomment -%}
+{%- assign b = include.pub -%}
+{%- if b.bibtex -%}
+{{- b.bibtex | strip -}}
+{%- else -%}
+{%- assign lb = "{" -%}{%- assign rb = "}" -%}
+{%- assign author_list = b.authors | remove: "*" | replace: ", and ", ", " | replace: " and ", ", " | split: ", " -%}
+{%- assign bib_authors = author_list | join: " and " | strip -%}
+{%- assign first_last = author_list.first | strip | split: " " | last | slugify | remove: "-" -%}
+{%- assign first_word = b.title | slugify | split: "-" | first -%}
+{%- assign bib_key = b.bibkey | default: "" -%}
+{%- if bib_key == "" -%}{%- assign bib_key = first_last | append: b.year | append: first_word -%}{%- endif -%}
+{%- unless bib_keys_seen -%}{%- assign bib_keys_seen = "" | split: "" -%}{%- endunless -%}
+{%- if bib_keys_seen contains bib_key -%}
+  {%- assign base_key = bib_key -%}
+  {%- for suffix in (1..9) -%}
+    {%- assign letter = "abcdefghij" | slice: suffix | append: "" -%}
+    {%- assign candidate = base_key | append: letter -%}
+    {%- unless bib_keys_seen contains candidate -%}{%- assign bib_key = candidate -%}{%- break -%}{%- endunless -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign bib_keys_seen = bib_keys_seen | push: bib_key -%}
+{%- assign bib_venue = b.venue | split: ", vol." | first | split: " pp." | first | split: ". Pages" | first | strip | append: "|" | replace: ",|", "" | remove: "|" | replace: "&amp;", "&" | replace: "&", "\\&" | replace: "#", "\\#" | replace: "%", "\\%" | replace: "$", "\\$" | replace: "_", "\\_" -%}
+{%- comment -%} Escape LaTeX special characters (Ruby gsub needs the doubled backslash). {%- endcomment -%}
+{%- assign bib_title = b.title | replace: "&", "\\&" | replace: "#", "\\#" | replace: "%", "\\%" | replace: "$", "\\$" | replace: "_", "\\_" -%}
+{%- assign bl = b.links -%}
+{%- assign btype = b.type | downcase | strip -%}
+{%- unless btype == "journal" or btype == "preprint" -%}{%- assign btype = "conference" -%}{%- endunless -%}
+{%- case btype -%}
+  {%- when "journal" -%}{%- assign bib_type = "article" -%}{%- assign venue_field = "journal" -%}
+  {%- when "conference" -%}{%- assign bib_type = "inproceedings" -%}{%- assign venue_field = "booktitle" -%}
+  {%- else -%}{%- assign bib_type = "misc" -%}{%- assign venue_field = "" -%}
+{%- endcase -%}
+@{{ bib_type }}{{ lb }}{{ bib_key }},
+  title = {{ lb }}{{ lb }}{{ bib_title }}{{ rb }}{{ rb }},
+  author = {{ lb }}{{ bib_authors }}{{ rb }},
+{%- if venue_field != "" and bib_venue != "" %}
+  {{ venue_field }} = {{ lb }}{{ bib_venue }}{{ rb }},
+{%- endif %}
+{%- if bib_type == "misc" and b.status %}
+  note = {{ lb }}{{ b.status }}{{ rb }},
+{%- endif %}
+{%- if bl.arxiv contains "arxiv.org/abs/" %}
+  eprint = {{ lb }}{{ bl.arxiv | split: "/abs/" | last }}{{ rb }},
+  archivePrefix = {{ lb }}arXiv{{ rb }},
+{%- endif %}
+{%- if bl.doi %}
+  doi = {{ lb }}{{ bl.doi | split: "doi.org/" | last | remove: "DOI:" | remove: "doi:" | strip }}{{ rb }},
+{%- endif %}
+{%- if b.month %}
+  month = {{ b.month | downcase | slice: 0, 3 }},
+{%- endif %}
+{%- if b.year %}
+  year = {{ lb }}{{ b.year }}{{ rb }}
+{%- endif %}
+{{ rb }}
+{%- endif -%}

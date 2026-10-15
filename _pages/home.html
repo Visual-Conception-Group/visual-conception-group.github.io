@@ -1,0 +1,129 @@
+---
+layout: default
+title: Visual Conception Group · IIIT Delhi
+permalink: /
+schema: schema-org.html
+citations: true
+scripts: [word-cloud.js, pub-details.js, scroll-strip.js]
+---
+{%- assign pubs = site.data.publications -%}
+{%- assign published = pubs | where_exp: "p", "p.type != 'preprint'" -%}
+{%- assign by_year = published | group_by: "year" | sort: "name" | reverse -%}
+{%- assign n_journal = published | where: "type", "journal" | size -%}
+{%- assign n_conf = published.size | minus: n_journal -%}
+{%- assign current = site.data.people | where: "status", "current" -%}
+
+<div class="hero-band{% if site.hero.background %} has-photo{% endif %}"{% if site.hero.background %} style="--hero-image: url('{{ site.hero.background | relative_url }}'); --hero-image-sm: url('{{ site.hero.background_small | default: site.hero.background | relative_url }}')"{% endif %}>
+<section class="hero wrap">
+  <div class="hero-text">
+    <h1 class="eyebrow">{{ site.hero.eyebrow }}</h1>
+    <p class="hero-title">{{ site.hero.headline | markdownify | remove: "<p>" | remove: "</p>" | strip }}</p>
+    <p class="hero-intro">{{ site.hero.intro }}</p>
+    <p class="hero-actions">
+      <a class="button button-primary" href="{{ '/publications/' | relative_url }}">Browse publications</a>
+      <a class="button" href="{{ '/team/' | relative_url }}">Meet the team</a>
+    </p>
+  </div>
+  {% include word-cloud.html pubs=published %}
+</section>
+</div>
+
+<section class="stats wrap" aria-label="The lab in numbers">
+  <dl>
+    <div><dt>Publications</dt><dd>{{ published.size }}</dd></div>
+    <div><dt>Journal articles</dt><dd>{{ n_journal }}</dd></div>
+    <div><dt>Conference papers</dt><dd>{{ n_conf }}</dd></div>
+  </dl>
+</section>
+
+<section class="section wrap" aria-labelledby="recent-heading">
+  <div class="section-head">
+    <h2 id="recent-heading">Recent publications</h2>
+    <div class="section-head-actions">
+      {% include strip-nav.html for="recent-strip" label="recent publications" %}
+      <a class="more" href="{{ '/publications/' | relative_url }}">All publications <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <div class="pub-grid" id="recent-strip" data-scroll-strip>
+    {%- assign shown = 0 -%}
+    {%- for group in by_year -%}
+      {%- for p in group.items -%}
+        {%- if shown < site.home.recent_publications -%}
+          {% include pub.html pub=p %}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="section wrap split" aria-label="Research themes and news">
+  <div>
+    <div class="section-head"><h2>Research themes</h2></div>
+    {%- assign max_topic = 1 -%}
+    {%- for t in site.data.topics -%}
+      {%- assign n = published | where_exp: "p", "p.topics contains t.id" | size -%}
+      {%- if n > max_topic -%}{%- assign max_topic = n -%}{%- endif -%}
+    {%- endfor %}
+    <ul class="themes">
+      {%- for t in site.data.topics %}
+      {%- assign n = published | where_exp: "p", "p.topics contains t.id" | size -%}
+      {%- assign pct = n | times: 100 | divided_by: max_topic %}
+      <li>
+        <a class="theme" href="{{ '/publications/' | relative_url }}?topic={{ t.id }}">
+          <span class="theme-text">
+            <span class="theme-title">{{ t.title }}</span>
+            <span class="theme-blurb">{{ t.blurb }}</span>
+          </span>
+          <span class="theme-meter">
+            <span class="theme-count">{{ n }} paper{% if n != 1 %}s{% endif %}</span>
+            <span class="theme-heat" style="--h: {{ pct }}" aria-hidden="true"></span>
+          </span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+  <div>
+    <div class="section-head">
+      <h2>News</h2>
+      <a class="more" href="{{ '/allnews.html' | relative_url }}">All news <span aria-hidden="true">→</span></a>
+    </div>
+    <ul class="news-list">
+      {%- for item in site.data.news limit: site.home.news %}
+      {% include news-item.html item=item %}
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section wrap" aria-labelledby="people-heading">
+  <div class="section-head">
+    <h2 id="people-heading">People</h2>
+    <div class="section-head-actions">
+      {% include strip-nav.html for="people-strip" label="people" %}
+      <a class="more" href="{{ '/team/' | relative_url }}">Team and alumni <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <ul class="people-strip" id="people-strip" data-scroll-strip>
+    {%- for m in current %}
+    <li>
+      <a href="{{ '/team/' | relative_url }}#{{ m.name | slugify }}">
+        {% include avatar.html person=m %}
+        <strong>{{ m.name }}</strong>
+        <span>{% include role-label.html person=m short=true %}</span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<section class="section wrap partners" aria-labelledby="partners-heading">
+  <h2 id="partners-heading" class="small-heading">Collaborators</h2>
+  <ul class="logos">
+    {%- for c in site.collaborators %}
+    <li>{% if c.url %}<a href="{{ c.url }}" title="{{ c.name }}">{% endif %}<img src="{{ c.logo | relative_url }}" alt="{{ c.name }}" loading="lazy">{% if c.url %}</a>{% endif %}</li>
+    {%- endfor %}
+  </ul>
+  <p class="partners-note">{{ site.funding | markdownify | remove: "<p>" | remove: "</p>" | strip }}</p>
+</section>

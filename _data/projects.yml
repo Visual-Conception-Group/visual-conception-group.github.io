@@ -1,0 +1,54 @@
+# Sponsored projects — shown on /sponsored_projects/.
+#
+# - title: "Project title"
+#   years: "2026-29"
+#   status: ongoing                  # ongoing | completed
+#   sponsor: "DST"                   # optional
+#   description: "What the project is about."
+#   demos:                           # optional list of live demos
+#     - label: "Demo name"
+#       url: http://example.org
+
+- title: Multimodal Vehicle and Person ReID
+  years: 2023-24
+  status: ongoing
+  description: The re-identification (reID) task aims to identify the target object across multiple camera angles, covering intersecting as well as non-intersecting area of coverage. General object detection and tracking are able to identify objects in one camera angle. However, they may lose the ability to detect and track an object across multiple cameras. The focus of this project is to develop multi-modal approaches such as text-based and image-based reID.
+  demos:
+  - label: Image based Person ReId
+    url: "http://reid.iiitd.edu.in"
+  - label: Image based Vehicle ReId
+    url: "http://reid.iiitd.edu.in:5000"
+  - label: Text based Person ReId
+    url: "http://reid.iiitd.edu.in:8080"
+  - label: Text based Vehicle ReId
+    url: "http://reid.iiitd.edu.in:8081"
+
+- title: Visual Traffic Analytics
+  years: 2021-24
+  status: ongoing
+  sponsor: TiH, IIIT-Delhi
+  description: Intelligent video analytics is one of the important aspects in a smart city planning. The huge video traffic that is generated day-to-day is impossible to manually scan and there is a pressing need for automated solutions. Tremendous progress has been made in this field in the recent past owing to the success of powerful deep learning models. Leveraging these developments, the focus of the project will be to automate the process with minimal human-in-loop intervention and shall be capable of dealing with multimedia data. This is sponsored by TiH, IIIT-D.
+
+- title: AI based 3D visualisation of computed tomographic datasets
+  years: 2021-24
+  status: ongoing
+  sponsor: DST (Core Research Grant)
+  description: Revolutionary advances in the field of medical imaging have led to improved diagnostics in all areas of medicine. In addition, these advanced imaging thus obtained are the backbone of pre and periprocedural planning in modern day interventions and surgeries. The interpretation of these medical images however remains limited by the way these datasets are visualized in clinical practice. Obviously, a method of visualization understood by all the team members managing a particular case is much more useful than the current standard of interpretation by expert radiologist. Fortunately, concurrent advancement in the field of computation and graphics has made variety of three-dimensional visualization feasible at a speed suitable for clinical usage. Currently, there are commercially available software for analysis of CT datasets provided by almost all the companies producing CT scanners. Volume rendered images created from these software packages however are limited, while others are not available in India. In addition, these software packages are prohibitively costly. In absence of optimal visualization, the imaging fails to reach its potential despite acquiring high quality data. The idea here is to provide a better 3D visualization of medical data. This work is sponsored under Core Research Grant, DST, Govt. of India.
+
+- title: Smart Visual Surveillance
+  years: 2019-22
+  status: completed
+  sponsor: DST SERB (Early Career Research Award)
+  description: Increasing visual surveillance has led to convenient access to digital video evidence in cases of untoward incidents. However, human monitoring is tedious and prone to error. To this end, our project aims to build a surveillance application which can track a given individual and re-identify, if required, from a given set of camera images. Applications include airports, railway stations and other crowded venues, where it is desired to know the trajectory of a person who appeared in one of the cameras in a camera network. This project was awarded under Early Career Research Award, DST SERB, Govt. of India.
+
+- title: Design and Development of Digital Multimedia Forgery Detection System
+  years: 2014-17
+  status: completed
+  sponsor: MeitY
+  description: The diffusion of multimedia content in our daily lives through mainstream media, social media and other platforms is increasing in a phenomenal manner. Combined with the digital editing techniques, this content has simply lost the validity as evidence. Towards this, our project aims at two broadly identified problems in the research community. The first goal of the project is to identify if a given test image/video has undergone any manipulation such as – linear or non-linear filtering, anti-forensic operations such as JPEG compression noise removal, or a combination of these operations. The second goal is towards identification of the source camera of a given test image/video. Photo Response Non-Uniformity (PRNU) has been widely used for source identification. This project was sponsored by MEITY, Govt. of India.
+
+- title: AUV Object Detection and Identification in Sonar Imaging
+  years: 2014-15
+  status: completed
+  sponsor: Naval Research Board, DRDO
+  description: The primary aim of this proposal is to develop onboard object detection and identification capabilities for an autonomous underwater vehicle (AUV). For object detection, a sonar is used by the AUV. We use sonar image processing techniques to detect an object and identify the type of the object against a set of targets. Once a target has been identified, the AUV surfaces and communicates the location of the target to the base station. Such an autonomous detection and identification capability will enable several naval applications like mine counter measure and detection of underwater threats to be highly effective. This project was sponsored by Naval Research Board, DRDO, Govt. of India.

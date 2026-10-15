@@ -1,0 +1,34 @@
+# Top navigation, in order. Each item:
+#
+# - title: Page name
+#   url: /page-url/
+#
+# An item with `links` instead of `url` becomes a drop-down menu. Its links can point to pages
+# on this site (/page-url/) or anywhere else (https://...):
+#
+# - title: Menu name
+#   links:
+#     - title: Link text
+#       url: https://example.org/
+#
+# The lab name, this menu and the light/dark switch share one row on wide screens. If you add an
+# item and the switch drops onto its own row in a window just over 1088px wide, raise the
+# 68em in the "Narrower screens" block of assets/css/main.css.
+- title: Home
+  url: /
+- title: Publications
+  url: /publications/
+- title: Team
+  url: /team/
+- title: Projects
+  url: /sponsored_projects/
+- title: Resources
+  url: /resources/
+- title: News
+  url: /allnews.html
+- title: Useful links
+  links:
+    - title: AI conference deadlines
+      url: https://paperswithcode.co/ai-deadlines
+- title: Join us
+  url: /join/

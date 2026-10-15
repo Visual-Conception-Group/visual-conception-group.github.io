@@ -1,0 +1,87 @@
+---
+layout: page
+title: Team
+eyebrow: People
+lede: Faculty, students and alumni of the Visual Conception Group.
+permalink: /team/
+description: >-
+  Faculty, PhD, master's and bachelor's students and alumni of the Visual Conception Group at
+  IIIT Delhi, led by Prof. A V Subramanyam.
+schema: schema-team.html
+---
+{%- comment -%}
+  Sections come from _data/team_sections.yml; people from _data/people.yml.
+  Current members are listed first, then alumni. Empty sections are skipped.
+{%- endcomment -%}
+{%- assign groups = "current,alumni" | split: "," -%}
+
+<nav class="jump-links" aria-label="Sections">
+  {%- for status in groups %}
+  {%- assign group_sections = site.data.team_sections | where: "status", status %}
+  <div class="jump-links-group">
+    <span>{% if status == "current" %}Current{% else %}Alumni{% endif %}</span>
+    {%- for s in group_sections %}
+    {%- assign members = site.data.people | where: "role", s.role | where: "status", s.status %}
+    {%- if members.size > 0 %}<a href="#{{ s.id }}">{{ s.title }}</a>{% endif %}
+    {%- endfor %}
+  </div>
+  {%- endfor %}
+</nav>
+
+{%- for status in groups %}
+{%- assign group_sections = site.data.team_sections | where: "status", status %}
+<div class="team-group" id="{{ status }}">
+  <h2 class="team-group-title">{% if status == "current" %}Current members{% else %}Alumni{% endif %}</h2>
+  {%- for s in group_sections %}
+  {%- assign members = site.data.people | where: "role", s.role | where: "status", s.status %}
+  {%- if members.size > 0 %}
+  <section class="team-section" id="{{ s.id }}" aria-labelledby="{{ s.id }}-h">
+    <h3 class="team-section-title" id="{{ s.id }}-h">{{ s.title }} <span class="count">{{ members.size }}</span></h3>
+    {%- if s.layout == "list" %}
+    <ul class="alumni-list">
+      {%- for m in members %}
+      <li id="{{ m.name | slugify }}">
+        <strong>{% if m.url %}<a href="{{ m.url }}">{{ m.name }}</a>{% else %}{{ m.name }}{% endif %}</strong>
+        {%- if m.program or m.until %}<span class="alumni-meta">{{ m.program }}{% if m.program and m.until %} · {% endif %}{{ m.until }}</span>{% endif %}
+        {%- if m.thesis %}<span>{{ m.thesis }}</span>{% endif %}
+        {%- if m.note %}<span>{{ m.note }}</span>{% endif %}
+        {%- if m.now %}<span>Now: {{ m.now }}</span>{% endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <div class="people-grid people-grid-{{ s.layout }}">
+      {%- for m in members %}
+      {% include person.html person=m layout=s.layout %}
+      {%- endfor %}
+    </div>
+    {%- endif %}
+  </section>
+  {%- endif %}
+  {%- endfor %}
+</div>
+{%- endfor %}
+
+{%- comment -%}
+  Safety net: anyone whose role/status matches no section above (a typo such as "Phd" or
+  "graduated") is listed here instead of silently disappearing.
+{%- endcomment -%}
+{%- assign known = "" | split: "" -%}
+{%- for s in site.data.team_sections -%}{%- assign key = s.role | append: ":" | append: s.status -%}{%- assign known = known | push: key -%}{%- endfor -%}
+{%- assign others = "" | split: "" -%}
+{%- for m in site.data.people -%}
+  {%- assign key = m.role | append: ":" | append: m.status -%}
+  {%- unless known contains key -%}{%- assign others = others | push: m -%}{%- endunless -%}
+{%- endfor %}
+{%- if others.size > 0 %}
+<div class="team-group" id="other">
+  <h2 class="team-group-title">Other members</h2>
+  <section class="team-section" aria-label="Other members">
+    <div class="people-grid people-grid-card">
+      {%- for m in others %}
+      {% include person.html person=m layout="card" %}
+      {%- endfor %}
+    </div>
+  </section>
+</div>
+{%- endif %}

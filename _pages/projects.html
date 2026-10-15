@@ -1,0 +1,35 @@
+---
+layout: page
+title: Sponsored projects
+eyebrow: Funding
+lede: Externally funded research projects, with live demos where available.
+permalink: /sponsored_projects/
+description: >-
+  Funded research projects of the Visual Conception Group, IIIT Delhi, including multimodal person
+  and vehicle re-identification and visual traffic analytics.
+---
+{%- assign groups = "ongoing,completed" | split: "," -%}
+{%- for status in groups %}
+{%- assign items = "" | split: "" -%}
+{%- for p in site.data.projects -%}{%- assign ps = p.status | downcase | strip -%}{%- if ps == status -%}{%- assign items = items | push: p -%}{%- endif -%}{%- endfor %}
+{%- if items.size > 0 %}
+<section class="project-section" aria-labelledby="{{ status }}-h">
+  <h2 id="{{ status }}-h">{{ status | capitalize }}</h2>
+  <div class="project-list">
+    {%- for p in items %}
+    <article class="project">
+      <p class="project-meta"><span class="project-years">{{ p.years }}</span>{% if p.sponsor %}<span>{{ p.sponsor }}</span>{% endif %}</p>
+      <h3>{{ p.title }}</h3>
+      <p class="project-desc">{{ p.description }}</p>
+      {%- if p.demos %}
+      <p class="project-demos-label">Live demos</p>
+      <ul class="project-demos">
+        {%- for d in p.demos %}<li><a href="{{ d.url }}">{{ d.label }}</a></li>{% endfor %}
+      </ul>
+      {%- endif %}
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+{%- endfor %}

@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html>
-
-  {% include head.html %}
-  {% include analytics.html %}
-
-  <body>
-
-    {% include header.html %}
-
-    <div class="container-fluid">
-      <div class="row">
-        {{ content }}
-      </div>
-    </div>
-
-    {% include footer.html %}
-
-  </body>
-
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include header.html %}
+  <main id="main">
+    {{ content }}
+  </main>
+  {% include footer.html %}
+  {%- if page.citations and site.citations.dimensions %}
+  <script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+  {%- endif %}
+  <script src="{{ '/assets/js/theme.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/menu.js' | relative_url }}" defer></script>
+  {%- for script in page.scripts %}
+  <script src="{{ script | prepend: '/assets/js/' | relative_url }}" defer></script>
+  {%- endfor %}
+</body>
 </html>

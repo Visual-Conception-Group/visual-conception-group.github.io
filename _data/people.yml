@@ -1,0 +1,310 @@
+# People — everyone on the Team page, current members and alumni.
+#
+# role:    faculty | postdoc | phd | masters | bachelors | ra
+# status:  current | alumni
+# program: optional, shown instead of the generic role, e.g. "MTech (Research)", "MTech", "BTech"
+# Sections on the Team page are listed in _data/team_sections.yml.
+# Photos go in images/teampic/ (square-ish, about 400×400 px). Without a photo, initials are shown.
+#
+# - name: Full Name
+#   url: https://homepage-or-linkedin            # optional
+#   role: phd
+#   status: current
+#   since: 2026                                  # year joined
+#   program: MTech (Research)                    # optional, for master's and bachelor's students
+#   photo: fullname.jpg                          # optional
+#   title: Professor                             # faculty only: job title
+#   pi: true                                     # faculty only: shows "PI" on the home page
+#   email: name@iiitd.ac.in                      # optional; shown on faculty cards only
+#   scholar: https://scholar.google.com/citations?user=...   # optional Google Scholar profile
+#   aliases: ["F. Name"]                         # other spellings used in author lists, so they get bolded
+#   education: ["BTech (CSE), Some University"]  # optional
+#
+# Current master's or bachelor's student (photo optional; initials are shown without one):
+#
+# - name: Full Name
+#   url: https://www.linkedin.com/in/...
+#   role: masters                                # or bachelors
+#   program: MTech (Research)
+#   status: current
+#   since: 2026
+#   thesis: "Thesis topic"                       # optional
+#
+# When someone graduates, change status to alumni and add:
+#   until: 2030
+#   thesis: "Thesis title"
+#   now: "Current position"
+#   note: "Co-supervised by ..."                 # optional one-line remark
+#
+# One person per entry: list project partners as separate entries with the same thesis.
+
+- name: A V Subramanyam
+  pi: true
+  scholar: "https://scholar.google.co.in/citations?user=aPDRgKAAAAAJ&hl=en"
+  aliases: ["A.V. Subramanyam", "A. V. Subramanyam", "A.V Subramanyam", "A. Subramanyam"]
+  role: faculty
+  status: current
+  title: Professor
+  photo: avs2.jpg
+  email: subramanyam@iiitd.ac.in
+  education:
+  - PhD (2012), Nanyang Technological University (NTU), Singapore
+
+- name: Himanshu Singh
+  url: "https://www.himanshu.phd"
+  role: phd
+  status: current
+  since: 2020
+  photo: himanshu.jpg
+  email: himanshus@iiitd.ac.in
+  education:
+  - BTech(CSE), GGSIP University, Delhi
+
+- name: Rameshwar Mishra
+  url: "https://in.linkedin.com/in/rameshwar-mishra-b53057148"
+  role: phd
+  status: current
+  since: 2022
+  photo: rameshwar.jpeg
+  education:
+  - BTech, IIIT Delhi
+
+- name: Nilanjana Chatterjee
+  url: "https://in.linkedin.com/in/chatterjeenilanjana"
+  role: phd
+  status: current
+  since: 2023
+  photo: nilanjana.jpeg
+  email: nilanjanac@iiitd.ac.in
+  education:
+  - BTech(CSE), MAKAUT, West Bengal
+
+- name: Ayaan Haider
+  url: "https://in.linkedin.com/in/ayaan-haider-0b470a1a2"
+  role: phd
+  status: current
+  since: 2025
+  photo: ayaan.jpg
+  email: ayaanh@iiitd.ac.in
+  education:
+  - BTech(ECE), Delhi Technological University
+
+- name: Wasim Raja
+  url: "https://in.linkedin.com/in/wasim-r-31857014b"
+  role: masters
+  program: MTech (Research)
+  status: current
+  since: 2026
+
+- name: Shivank Rajput
+  role: bachelors
+  program: BTech
+  status: current
+
+- name: Astha Verma
+  aliases: ["A. Verma"]
+  url: "https://in.linkedin.com/in/astha-verma-b08527232"
+  role: phd
+  status: alumni
+  until: 2023
+  photo: astha.jpeg
+  thesis: Generative and Adversarial Learning for Object Recognition
+  note: Co-supervised by Dr Rajiv Ratn Shah, IIIT Delhi
+  now: Research Fellow at Singapore Institute of Technology
+
+- name: Monika Jain
+  aliases: ["M. Jain"]
+  url: "https://in.linkedin.com/in/monikajain-qut"
+  role: phd
+  status: alumni
+  until: 2022
+  photo: monika.jpeg
+  thesis: Regularized Ensemble Correlation Filter Tracking
+  note: Joint PhD with QUT, Brisbane
+  now: Computer Vision Engineer III, Stats Perform
+
+- name: Kajal Kansal
+  aliases: ["K. Kansal"]
+  url: "https://sites.google.com/iiitd.ac.in/kajalk/"
+  role: phd
+  status: alumni
+  until: 2021
+  photo: kajal.jpeg
+  thesis: Modality Guided Representation Learning for Person Re-identification
+  now: Assistant Professor, Department of Computer Science, BITS Pilani Dubai Campus, UAE
+
+- name: Ambuj Mehrish
+  aliases: ["A. Mehrish"]
+  url: "https://sg.linkedin.com/in/ambuj-mehrish-159a0417b"
+  role: phd
+  status: alumni
+  until: 2020
+  photo: ambuj.jpeg
+  thesis: Estimation and Concealment of Forensic Multimedia Signatures
+  now: MSCA Researcher (Principal Investigator), Ca' Foscari University of Venice, Italy
+
+- name: Vinay Kumar Verma
+  aliases: ["Vinay K. Verma", "Vinay K Verma"]
+  url: "https://www.linkedin.com/in/vermavinay982/"
+  role: masters
+  program: MTech (Research)
+  status: alumni
+  thesis: Gaussian Enhanced Network for Efficient Segmentation via Intelligent Sampling
+
+- name: Abu Osama Siddiqui
+  url: "https://in.linkedin.com/in/abu-osama-siddiqui"
+  role: masters
+  status: alumni
+  thesis: Optimal Transport Guided Contrastive Video Summarization
+
+- name: Anup Jha
+  url: "https://in.linkedin.com/in/anupjha05"
+  role: masters
+  status: alumni
+
+- name: Manish Jethmalani
+  role: masters
+  status: alumni
+
+- name: Archit Arora
+  role: masters
+  status: alumni
+
+- name: Dipankar Sarkar
+  role: masters
+  status: alumni
+
+- name: Biman Giri
+  role: masters
+  status: alumni
+  thesis: Unsupervised Vehicle Synthesis and Re-Identification
+
+- name: Vineet Joshi
+  role: masters
+  status: alumni
+
+- name: Harsh Kumar Jain
+  aliases: ["Harsh Jain"]
+  role: masters
+  status: alumni
+  thesis: Pose Disentangled Person Re-identification
+
+- name: Sagar Gupta
+  role: masters
+  status: alumni
+  thesis: Unsupervised Cross Domain Human Image Synthesis for Person Re-identification
+
+- name: Arjun Tyagi
+  aliases: ["A. Tyagi"]
+  role: masters
+  status: alumni
+  thesis: Channel Regularized Visual Object Tracking
+
+- name: Divya Sitani
+  aliases: ["D. Sitani"]
+  role: masters
+  status: alumni
+  thesis: Visual Tracking using Analysis Dictionary Learning
+
+- name: Shobhita Saxena
+  role: masters
+  status: alumni
+  thesis: Video Inpainting Detection using Inconsistencies in Optical Flow
+
+- name: Shivani Mamodia
+  role: masters
+  status: alumni
+  thesis: Post Silicon Validation using Regression
+
+- name: Akshay Modi
+  role: bachelors
+  status: alumni
+
+- name: Madhava Krishna
+  role: bachelors
+  status: alumni
+
+- name: Vibhu Dubey
+  url: "https://in.linkedin.com/in/dubeyvibhu"
+  role: bachelors
+  status: alumni
+  thesis: Text based Person Search
+
+- name: Niranjan Sundararajan
+  url: "https://in.linkedin.com/in/niranjan-sundararajan-962999198"
+  role: bachelors
+  status: alumni
+  thesis: Text based Person Search
+
+- name: Ansh Arora
+  role: bachelors
+  status: alumni
+  thesis: Unsupervised Video representation Learning
+
+- name: Kunal Saini
+  aliases: ["K. Saini"]
+  role: bachelors
+  status: alumni
+  thesis: Airborne Visual Tracking and Re-identification
+
+- name: Mohammad Nayeem
+  role: bachelors
+  status: alumni
+  thesis: Efficient Surveillance Video Compression using Dictionary Learning
+
+- name: Kunal Sharma
+  role: bachelors
+  status: alumni
+  thesis: Semi Dense Adversarial LSTM for Unsupervised Video Summarization
+
+- name: Vipin Chaudhary
+  role: bachelors
+  status: alumni
+  thesis: Semi Dense Adversarial LSTM for Unsupervised Video Summarization
+
+- name: Neelabhro Roy
+  role: bachelors
+  status: alumni
+  thesis: Metric Learning for Object Recognition
+
+- name: Siddharth Dhawan
+  role: bachelors
+  status: alumni
+  thesis: Unsupervised Domain Adaptation for Person Re-identification
+
+- name: Priysha Aggarwal
+  role: bachelors
+  status: alumni
+  thesis: Unsupervised Learning of Low Rank Subspace Projection using Graph Embedding
+
+- name: Kshitiz Jain
+  role: bachelors
+  status: alumni
+  thesis: Unsupervised Learning of Low Rank Subspace Projection using Graph Embedding
+
+- name: Harsh Pathak
+  role: bachelors
+  status: alumni
+  thesis: Deepfake Video Detection
+
+- name: Shreedhar Govil
+  role: bachelors
+  status: alumni
+  thesis: Deepfake Video Detection
+
+- name: Niyati Singal
+  aliases: ["Niyati Singal"]
+  role: ra
+  status: alumni
+
+- name: Siddhartha De
+  role: ra
+  status: alumni
+
+- name: Divij Gera
+  role: ra
+  status: alumni
+
+- name: Mohammad Ali Jauhar
+  role: ra
+  status: alumni

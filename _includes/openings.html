@@ -1,0 +1,109 @@
+{%- comment -%}
+  Open positions from _data/openings.yml, for the Join us page.
+  Usage: {% include openings.html %} for the list, or {% include openings.html part="summary" %}
+  for a short "N open positions" link (shown only when there are some).
+  A position whose deadline has passed is left out. Each position also gets schema.org
+  JobPosting data, so it can appear in job search results (it needs a `posted` date).
+{%- endcomment -%}
+{%- assign today = site.time | date: "%Y-%m-%d" -%}
+{%- assign open_positions = "" | split: "" -%}
+{%- for p in site.data.openings -%}
+  {%- if p.deadline -%}
+    {%- assign last_day = p.deadline | date: "%Y-%m-%d" -%}
+    {%- if last_day < today -%}{%- continue -%}{%- endif -%}
+  {%- endif -%}
+  {%- assign open_positions = open_positions | push: p -%}
+{%- endfor -%}
+
+{%- if include.part == "summary" -%}
+{%- if open_positions.size > 0 %}
+<p class="openings-callout"><a href="#open-positions">{{ open_positions.size }} open position{% if open_positions.size > 1 %}s{% endif %}: see below</a></p>
+{%- endif -%}
+{%- else %}
+<section class="openings" id="open-positions" aria-labelledby="open-positions-h">
+  <h2 id="open-positions-h">Open positions</h2>
+  {%- if open_positions.size == 0 %}
+  <p class="openings-empty">There are no open positions right now. New openings are posted here and in the <a href="{{ '/allnews.html' | relative_url }}">news</a>. You are still welcome to write to us about the options above.</p>
+  {%- else %}
+  <div class="position-list">
+    {%- for p in open_positions %}
+    {%- assign pid = p.title | slugify | prepend: "position-" -%}
+    {%- assign subject = p.subject | default: "" -%}
+    {%- if subject == "" -%}{%- assign subject = "Application: " | append: p.title -%}{%- endif -%}
+    {%- capture mailto -%}mailto:{{ site.contact.email }}?subject={{ subject | url_encode | replace: "+", "%20" }}{%- endcapture -%}
+    {%- capture details -%}
+      {{ p.description | markdownify }}
+      {%- if p.requirements %}
+      <h4>Requirements</h4>
+      <ul>
+        {%- for r in p.requirements %}<li>{{ r | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>{% endfor %}
+      </ul>
+      {%- endif %}
+    {%- endcapture %}
+    <article class="position" id="{{ pid }}">
+      {%- if p.type or p.project %}
+      <p class="project-meta">{% if p.type %}<span class="project-years">{{ p.type }}</span>{% endif %}{% if p.project %}<span>{{ p.project }}</span>{% endif %}</p>
+      {%- endif %}
+      <h3>{{ p.title }}</h3>
+      {%- if p.deadline or p.start or p.duration or p.stipend %}
+      <dl class="position-facts">
+        {%- if p.deadline %}<div><dt>Apply by</dt><dd><time datetime="{{ p.deadline | date: '%Y-%m-%d' }}">{{ p.deadline | date: "%-d %B %Y" }}</time></dd></div>{% endif %}
+        {%- if p.start %}<div><dt>Start</dt><dd>{{ p.start }}</dd></div>{% endif %}
+        {%- if p.duration %}<div><dt>Duration</dt><dd>{{ p.duration }}</dd></div>{% endif %}
+        {%- if p.stipend %}<div><dt>Stipend</dt><dd>{{ p.stipend }}</dd></div>{% endif %}
+      </dl>
+      {%- endif %}
+      <div class="position-details">
+        {{ details }}
+      </div>
+      {%- if p.apply %}
+      <div class="position-apply">{{ p.apply | markdownify }}</div>
+      {%- elsif p.apply_url == nil %}
+      <div class="position-apply"><p>Email your CV (PDF, at most 2 pages) to <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a> with the subject "{{ subject }}".</p></div>
+      {%- endif %}
+      <p class="position-actions">
+        {%- if p.apply_url %}
+        <a class="button button-primary" href="{{ p.apply_url }}">Apply</a>
+        {%- else %}
+        <a class="button button-primary" href="{{ mailto }}">Apply by email</a>
+        {%- endif %}
+        {%- if p.advert %}
+        <a class="button" href="{% include link-url.html url=p.advert %}">Full advertisement</a>
+        {%- endif %}
+      </p>
+      {%- if p.posted %}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
+        "title": {{ p.title | jsonify }},
+        "description": {{ details | strip | jsonify }},
+        "datePosted": {{ p.posted | date: "%Y-%m-%d" | jsonify }},
+        {%- if p.deadline %}
+        "validThrough": {{ p.deadline | date: "%Y-%m-%dT23:59:59+05:30" | jsonify }},
+        {%- endif %}
+        {%- if p.employment %}
+        "employmentType": {{ p.employment | jsonify }},
+        {%- endif %}
+        "hiringOrganization": { "@type": "Organization", "name": {{ site.institute.name | jsonify }}, "sameAs": {{ site.institute.url | jsonify }} },
+        "jobLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": {{ site.contact.postal.street | jsonify }},
+            "addressLocality": {{ site.contact.postal.locality | jsonify }},
+            "addressRegion": {{ site.contact.postal.region | jsonify }},
+            "postalCode": {{ site.contact.postal.postal_code | jsonify }},
+            "addressCountry": {{ site.contact.postal.country | jsonify }}
+          }
+        },
+        "url": {{ page.url | absolute_url | append: "#" | append: pid | jsonify }}
+      }
+      </script>
+      {%- endif %}
+    </article>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+</section>
+{%- endif -%}

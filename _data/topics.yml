@@ -1,0 +1,35 @@
+# Research themes. Shown on the home page and as filters on /publications/.
+# Tag papers with these ids in publications.yml (topics: [reid, adversarial]).
+# Paper counts next to each theme are calculated automatically.
+#
+# - id: short-id                 # lowercase, no spaces; used in publications.yml
+#   title: Theme name
+#   blurb: One sentence describing the theme.
+
+- id: generative
+  title: Generative models
+  blurb: Text-driven image editing, reference-guided generation and relighting with diffusion and flow models.
+
+- id: reid
+  title: Re-identification
+  blurb: Finding the same person or vehicle across cameras, from images or a text description.
+
+- id: adversarial
+  title: Adversarial robustness
+  blurb: Attacks on vision models and the defenses that undo them.
+
+- id: vision-language
+  title: Vision and language
+  blurb: Text-based search, language-guided defenses and scene-graph-to-image generation.
+
+- id: forensics
+  title: Multimedia forensics
+  blurb: Forgery detection, camera fingerprints, anti-forensics and watermarking.
+
+- id: tracking
+  title: Visual tracking
+  blurb: Correlation-filter and learned trackers for single and multiple objects.
+
+- id: video
+  title: Video analytics
+  blurb: Summarisation, compression and analysis of surveillance and dash-cam video.

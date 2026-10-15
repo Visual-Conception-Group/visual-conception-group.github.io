@@ -1,0 +1,11 @@
+{%- comment -%}
+  Prints the DOI used for citation counts: the paper's DOI, or the arXiv DOI for arXiv-only papers.
+  Usage: {% capture doi %}{% include metric-doi.html links=p.links %}{% endcapture %}
+{%- endcomment -%}
+{%- assign ml = include.links -%}
+{%- if ml.doi -%}
+  {{- ml.doi | split: "doi.org/" | last | remove: "DOI:" | remove: "doi:" | downcase | strip -}}
+{%- elsif ml.arxiv contains "arxiv.org/abs/" -%}
+  {%- assign arxiv_id = ml.arxiv | split: "/abs/" | last | split: "v" | first -%}
+  10.48550/arxiv.{{- arxiv_id | downcase -}}
+{%- endif -%}

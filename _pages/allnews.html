@@ -1,0 +1,14 @@
+---
+layout: page
+title: News
+eyebrow: Updates
+lede: Papers, awards, defenses and openings.
+permalink: /allnews.html
+description: >-
+  News from the Visual Conception Group at IIIT Delhi: accepted papers, awards, PhD defenses and openings.
+---
+<ol class="news-list news-list-full">
+  {%- for item in site.data.news %}
+  {% include news-item.html item=item %}
+  {%- endfor %}
+</ol>

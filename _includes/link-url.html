@@ -1,0 +1,8 @@
+{%- comment -%}
+  Links to files on this site get the baseurl; full URLs pass through unchanged.
+  "/downloads/x.pdf" and "downloads/x.pdf" both work.
+{%- endcomment -%}
+{%- assign u = include.url | strip -%}
+{%- assign head2 = u | slice: 0, 2 -%}
+{%- assign head4 = u | slice: 0, 4 | downcase -%}
+{%- if head4 == "http" or head2 == "//" -%}{{ u }}{%- else -%}{{ u | relative_url }}{%- endif -%}

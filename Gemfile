@@ -1,6 +1,6 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem "jekyll", ">= 3.6.3"
-
-
+# The same Jekyll, Liquid and plugins that GitHub Pages uses to build the live site,
+# so a local preview behaves exactly like production.
+gem "github-pages", "~> 232", group: :jekyll_plugins
 gem "webrick", "~> 1.7"

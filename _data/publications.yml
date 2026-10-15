@@ -1,0 +1,949 @@
+# Publications — every paper on the site comes from this file.
+# Shown on /publications/ (grouped by year, preprints first); the newest published
+# papers also appear on the home page.
+#
+# To add a paper, copy a block below to the TOP of the list and fill it in.
+# Only title and authors are required. Delete any line you don't need.
+#
+# Published paper:
+#
+# - title: "Paper title"
+#   authors: "First Author*, Second Author*, A V Subramanyam"   # * = equal contribution (note is added automatically)
+#   venue: "European Conference on Computer Vision (ECCV)"
+#   short: "ECCV"                                # small badge next to the title
+#   year: 2026
+#   month: Oct                                   # optional; used in the BibTeX entry
+#   type: conference                             # conference | journal | preprint (lowercase)
+#   award: "Best Paper Award"                    # optional
+#   presentation: Oral                           # optional: Oral | Poster | Spotlight
+#   status: accepted                             # optional: "accepted" shows "to appear" until it is published
+#   summary: "One sentence in plain language."   # optional, shown under the title
+#   abstract: "The full abstract."               # optional, shown behind an "Abstract" button
+#   topics: [adversarial]                        # ids from _data/topics.yml
+#   links:
+#     pdf: /downloads/my_paper.pdf               # file placed in the downloads/ folder, or a full URL
+#     doi: 10.1109/ICIP.2026.1234567             # just the DOI, no https://doi.org/
+#     arxiv: https://arxiv.org/abs/2601.01234
+#     code: https://github.com/Visual-Conception-Group/repo
+#     project: https://example.org/project-page
+#     slides: /downloads/my_slides.pdf
+#     poster: /downloads/my_poster.pdf
+#     video: https://www.youtube.com/watch?v=...
+#     url: https://example.org/paper             # any other link
+#   bibkey: singh2026paper                       # optional citation key for the generated BibTeX
+#   bibtex: |                                    # optional; without it a BibTeX entry is generated
+#     @inproceedings{key2026,
+#       title = {...},
+#     }
+#
+# Preprint or paper under review (shown in its own "Preprints" group):
+#
+# - title: "Paper title"
+#   authors: "First Author, A V Subramanyam"
+#   type: preprint
+#   status: "Under review"                       # optional label, e.g. "Under review", "Submitted"
+#   year: 2026                                   # optional
+#   topics: [adversarial]
+#   links:
+#     arxiv: https://arxiv.org/abs/2601.01234    # optional
+#
+# When a preprint is accepted: change type to conference or journal, add venue/short/year,
+# and either remove status or set it to accepted.
+#
+# Lab members are bolded in author lists automatically (names and aliases in people.yml).
+
+- title: Mitigating Distribution Shift for Adversarial Purification
+  authors: Himanshu Singh, A V Subramanyam
+  year: 2026
+  type: preprint
+  status: Under review
+  topics:
+  - adversarial
+
+- title: Learning Adversarial Manifold for Jailbreaking at Scale
+  authors: Shivank Rajput*, Himanshu Singh*, A V Subramanyam
+  year: 2026
+  type: preprint
+  status: Under review
+  topics:
+  - adversarial
+
+- title: Unified Multi-Dataset Training for TBPS
+  authors: Nilanjana Chatterjee, Sidharatha Garg, A V Subramanyam, Brejesh Lall
+  short: arXiv
+  year: 2026
+  type: preprint
+  topics:
+  - reid
+  - vision-language
+  links:
+    arxiv: "https://arxiv.org/abs/2601.14978"
+
+- title: Scene-Consistent Illumination Transfer for Inserted Advertising Graphics
+  authors: Rameshwar Mishra, Bishshoy Das, A. V. Subramanyam, Guan-Ming Su
+  short: arXiv
+  year: 2026
+  type: preprint
+  topics:
+  - generative
+  links:
+    arxiv: "https://arxiv.org/abs/2609.37951"
+
+- title: "Corrupting Attention: Evasion-Based Adversarial Attacks on Encoder Attention in Detection Transformers"
+  authors: Ridma Jayasundara, Shaheer Mohamed, Tharindu Fernando, Harshala Gammulle, Basura Fernando, Sanka Rasnayake, A V Subramanyam, Sridha Sridharan, Clinton Fookes
+  short: arXiv
+  year: 2026
+  type: preprint
+  topics:
+  - adversarial
+  links:
+    arxiv: "https://arxiv.org/abs/2608.06674"
+
+- title: Novel View Synthesis using DDIM Inversion
+  authors: Sehajdeep Singh, A V Subramanyam, Aditya Gupta, Sahil Gupta
+  short: arXiv
+  year: 2025
+  type: preprint
+  topics:
+  - generative
+  links:
+    arxiv: "https://arxiv.org/abs/2508.10688"
+    code: "https://github.com/Visual-Conception-Group/ddim_nvs"
+
+- title: Boosting Weak Positives for Text Based Person Search
+  authors: Akshay Modi, Ashhar Aziz, Nilanjana Chatterjee, A V Subramanyam
+  short: arXiv
+  year: 2025
+  type: preprint
+  topics:
+  - reid
+  - vision-language
+  links:
+    arxiv: "https://arxiv.org/abs/2501.17586"
+
+- title: Conditional Consistency Guided Image Translation and Enhancement
+  authors: Amil Bhagat, Milind Jain, A. V. Subramanyam
+  short: arXiv
+  year: 2025
+  type: preprint
+  topics:
+  - generative
+  links:
+    arxiv: "https://arxiv.org/abs/2501.01223"
+    code: "https://github.com/amilbhagat/Conditional-Consistency-Models"
+
+- title: "OTEdit: Entropic Transport Corrected Trajectory for Inversion-Free Flow-Based Image Editing"
+  authors: Rameshwar Mishra, Akshay Modi, A V Subramanyam
+  venue: Conference on Neural Information Processing Systems (NeurIPS)
+  short: NeurIPS
+  year: 2026
+  month: Dec
+  type: conference
+  status: accepted
+  summary: Proposes an inversion-free, text-driven image editing method that steers flow-model editing trajectories using entropic optimal transport between source and target latent particle clouds, improving structure preservation and semantic alignment.
+  topics:
+  - generative
+  links:
+    url: "https://openreview.net/forum?id=SnQJpsC6YB"
+
+- title: "RefineFlow: Estimating the Editing Velocity with Geometric, Trajectory, and Locality Priors for Inversion Free Flow Editing"
+  authors: Rameshwar Mishra, A V Subramanyam
+  venue: British Machine Vision Conference (BMVC)
+  short: BMVC
+  year: 2026
+  month: Nov
+  type: conference
+  status: accepted
+  topics:
+  - generative
+  links:
+    url: "https://bmvc2026.bmva.org/programme/accepted_papers/"
+
+- title: Do Prompts Guarantee Safety? Mitigating Toxicity from LLM Generations through Gradient Based Subspace Intervention
+  authors: Himanshu Singh, Ziwei Xu, A V Subramanyam, Mohan Kankanhalli
+  venue: "Findings of the Association for Computational Linguistics: EMNLP 2026"
+  short: EMNLP
+  year: 2026
+  month: Oct
+  type: conference
+  status: accepted
+  summary: Proposes a gradient-based subspace intervention that finds and suppresses hidden toxic patterns in LLM representations, reducing toxicity of state-of-the-art detoxification systems by 8-20% while keeping fluency.
+  abstract: Large Language Models (LLMs) are powerful text generators, yet they can produce toxic or harmful content even when given seemingly harmless prompts. This presents a serious safety challenge and can cause real-world harm. Toxicity is often subtle and context-dependent, making it difficult to detect at the token level or through coarse sentence-level signals. Moreover, efforts to mitigate toxicity often face a trade-off between safety and the coherence, or fluency, of the generated text. In this work, we present a targeted subspace intervention strategy based on gradient signals for identifying and suppressing hidden toxic patterns from underlying model representations, while preserving the overall ability to generate safe, fluent content. On the RealToxicityPrompts dataset, our method achieves strong mitigation performance compared to existing baselines while imposing minimal impact on inference complexity. Across LLMs, our approach reduces the toxicity of state-of-the-art detoxification systems by 8-20%, while maintaining comparable fluency. We further validate cross-benchmark generality on ToxiGen, where the same gains hold under adversarial, implicitly toxic prompts. Through extensive quantitative and qualitative analyses, we show that our approach achieves effective toxicity reduction without impairing generative performance, consistently outperforming existing baselines.
+  topics: []
+  links:
+    arxiv: "https://arxiv.org/abs/2602.06623"
+    doi: 10.48550/arXiv.2602.06623
+
+- title: "RefDiT: Local Attribute Guidance in Reference-Based Image Generation"
+  authors: Rameshwar Mishra, Srikrishna Karanam, A V Subramanyam
+  venue: European Conference on Computer Vision (ECCV), LNCS Part XXV, pp. 366-382
+  short: ECCV
+  year: 2026
+  month: Sep
+  type: conference
+  summary: RefDiT is a reference-guided image generation framework that decomposes identifier tokens into attribute-level signals and trains LoRA blocks of a diffusion transformer to transfer local attributes from reference images.
+  topics:
+  - generative
+  links:
+    doi: 10.1007/978-3-032-37461-5_20
+    arxiv: "https://arxiv.org/abs/2609.04976"
+
+- title: Nearest Neighbor Projection Removal Adversarial Training
+  authors: Himanshu Singh, A. V. Subramanyam, Shivank Rajput, Mohan Kankanhalli
+  venue: IEEE Transactions on Artificial Intelligence, vol. 7, no. 9, pp. 5287-5295
+  short: IEEE TAI
+  year: 2026
+  month: Sep
+  type: journal
+  summary: Proposes an adversarial training method that improves robustness by finding each adversarial sample's nearest neighbours from other classes and removing its feature projections onto them, reducing inter-class feature overlap.
+  abstract: Deep neural networks have exhibited impressive performance in image classification tasks but remain vulnerable to adversarial examples. Standard adversarial training enhances robustness but typically fails to explicitly address inter-class feature overlap, a significant contributor to adversarial susceptibility. In this work, we introduce a novel adversarial training framework that actively mitigates inter-class proximity by projecting out inter-class dependencies from adversarial and clean samples in the feature space. Specifically, our approach first identifies the nearest inter-class neighbors for each adversarial sample and subsequently removes projections onto these neighbors to enforce stronger feature separability. Theoretically, we demonstrate that our proposed logits correction reduces the Lipschitz constant of neural networks, thereby lowering the Rademacher complexity, which directly contributes to improved generalization and robustness. Extensive experiments across standard benchmarks including CIFAR-10, CIFAR-100, and SVHN show that our method demonstrates strong performance that is competitive with leading adversarial training techniques, highlighting significant achievements in both robust and clean accuracy. Our findings reveal the importance of addressing inter-class feature proximity explicitly to bolster adversarial robustness in DNNs.
+  topics:
+  - adversarial
+  links:
+    doi: 10.1109/TAI.2026.3681719
+    arxiv: "https://arxiv.org/abs/2509.07673"
+    code: "https://github.com/Visual-Conception-Group/nnPRAT"
+
+- title: "AD-Relight: Training-Free Banner Relighting via Illumination Translation with Diffusion Priors"
+  authors: Rameshwar Mishra, A V Subramanyam
+  venue: IEEE International Conference on Multimedia and Expo Workshops (ICMEW), CMI2IT Workshop, Bangkok, Thailand
+  short: ICMEW
+  year: 2026
+  month: Jul
+  type: conference
+  status: accepted
+  summary: Presents AD-Relight, a multi-stage, training-free framework that adapts a diffusion-based relighting model at test time to realistically relight custom ad banners inserted into scenes.
+  topics:
+  - generative
+  links:
+    arxiv: "https://arxiv.org/abs/2604.24407"
+
+- title: Lie Bracket Geometry of Feature Learning in Neural Networks
+  authors: A V Subramanyam
+  venue: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)
+  short: ICASSP
+  year: 2026
+  month: May
+  type: conference
+  summary: "Studies neural network training dynamics through Lie brackets of loss-gradient vector fields: the brackets vanish in the NTK (lazy) regime, and non-zero brackets mark feature learning."
+  topics: []
+  links:
+    doi: 10.1109/icassp55912.2026.11462529
+
+- title: Beckman Adversarial Defense
+  authors: A. V. Subramanyam
+  venue: IEEE International Conference on Multimedia and Expo (ICME), pp. 1-6
+  short: ICME
+  year: 2025
+  type: conference
+  summary: Proposes the Beckman barycenter, an efficiently computable optimal-transport barycenter, which is used to fine-tune adversarially trained networks and improves their robustness to AutoAttack on CIFAR and Tiny ImageNet.
+  topics:
+  - adversarial
+  links:
+    doi: 10.1109/ICME59968.2025.11209355
+    arxiv: "https://arxiv.org/abs/2301.01495"
+    code: "https://github.com/Visual-Conception-Group/test-barycentric-defense"
+
+- title: Keypoint Aware Masked Image Modelling
+  authors: Madhava Krishna, A. V. Subramanyam
+  venue: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pp. 1-5
+  short: ICASSP
+  year: 2025
+  type: conference
+  summary: Proposes KAMIM, which weights image patches using keypoint features during SimMIM's masked reconstruction, improving linear probing and fine-tuning accuracy of vision transformers on ImageNet-1K.
+  topics: []
+  links:
+    doi: 10.1109/ICASSP49660.2025.10889887
+    arxiv: "https://arxiv.org/abs/2407.13873"
+    code: "https://github.com/madhava20217/KAMIM"
+
+- title: Efficient Localized Perception for Resource-Constrained Vision Systems
+  authors: A. V. Subramanyam, Niyati Singal, Vinay K. Verma
+  venue: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Hyderabad, India, pp. 1-5
+  short: ICASSP
+  year: 2025
+  type: conference
+  summary: Introduces a memory-efficient patch-based framework that combines global context with local patch information to train on ultra-high-resolution images, running even on resource-constrained devices like Jetson Nano.
+  topics: []
+  links:
+    doi: 10.1109/ICASSP49660.2025.10888483
+    arxiv: "https://arxiv.org/abs/2405.07166"
+    code: "https://github.com/Visual-Conception-Group/Localized-Perception-Constrained-Vision-Systems"
+
+- title: Layout Free Scene Graph to Image Generation
+  authors: Rameshwar Mishra, A V Subramanyam
+  venue: The British Machine Vision Conference (BMVC)
+  short: BMVC
+  year: 2024
+  type: conference
+  topics:
+  - vision-language
+  - generative
+  links:
+    doi: 10.48550/arXiv.2401.14111
+    pdf: /downloads/BMVC2024__Copy_.pdf
+    url: "https://bmvc2024.org/proceedings/420/"
+    code: "https://github.com/RameshwarCV/GANDiffuCLIP"
+
+- title: Language Guided Adversarial Purification
+  authors: Himanshu Singh, A V Subramanyam
+  venue: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)
+  short: ICASSP
+  year: 2024
+  type: conference
+  abstract: Adversarial purification using generative models demonstrates strong adversarial defense performance. These methods are classifier and attack-agnostic, making them versatile but often computationally intensive. Recent strides in diffusion and score networks have improved image generation and, by extension, adversarial purification. Another highly efficient class of adversarial defense methods known as adversarial training requires specific knowledge of attack vectors, forcing them to be trained extensively on adversarial examples. To overcome these limitations, we introduce a new framework, namely Language Guided Adversarial Purification (LGAP), utilizing pre-trained diffusion models and caption generators to defend against adversarial attacks. Given an input image, our method first generates a caption, which is then used to guide the adversarial purification process through a diffusion network. Our approach has been evaluated against strong adversarial attacks, proving its effectiveness in enhancing adversarial robustness. Our results indicate that LGAP outperforms most existing adversarial defense techniques without requiring specialized network training. This underscores the generalizability of models trained on large datasets, highlighting a promising direction for further research.
+  topics:
+  - adversarial
+  - vision-language
+  links:
+    doi: 10.1109/icassp48485.2024.10446676
+    arxiv: "https://arxiv.org/abs/2309.10348"
+    code: "https://github.com/Visual-Conception-Group/LGAP"
+
+- title: Meta Generative Attack on Person Reidentification
+  authors: A V Subramanyam
+  venue: IEEE Transactions on Circuits and Systems for Video Technology
+  short: IEEE TCSVT
+  year: 2023
+  type: journal
+  topics:
+  - reid
+  - adversarial
+  - generative
+  links:
+    doi: 10.1109/TCSVT.2023.3237808
+    arxiv: "https://arxiv.org/abs/2301.06286"
+
+- title: Circularly Polarized Fabry-Pèrot Cavity Sensing Antenna Design using Generative Model
+  authors: Kainat Yasmeen, K V Mishra, A V Subramanyam and S S Ram
+  venue: IEEE Sensors Letters
+  short: IEEE Sensors Letters
+  year: 2023
+  type: journal
+  topics:
+  - generative
+  links:
+    doi: 10.1109/LSENS.2023.3237366
+    arxiv: "https://arxiv.org/abs/2209.14550"
+
+- title: Dense captioning for Text-Image ReID
+  authors: A V Subramanyam, Vibhu Dubey, Niranjan Sundararajan, Brejesh Lall
+  venue: "Indian Conference on Computer Vision, Graphics and Image Processing (ICVGIP), pp. 17:1-17:8"
+  short: ICVGIP
+  year: 2023
+  type: conference
+  summary: Proposes a text-to-image person ReID dataset of 20,000 in-the-wild identities with dense captions, adds Stable Diffusion/BLIP synthetic data, and benchmarks state-of-the-art ReID and vision-language models.
+  topics:
+  - reid
+  - vision-language
+  - generative
+  links:
+    doi: 10.1145/3627631.3627648
+    arxiv: "https://arxiv.org/abs/2305.04497"
+    code: "https://github.com/Visual-Conception-Group/Dense-Captioning-for-Text-Image-ReID"
+
+- title: Meta Perturbed Re-Id Defense
+  authors: Astha Verma, A V Subramanyam, Mohammad Ali Jauhar, Divij Gera, Rajiv Ratn Shah
+  venue: IEEE International Conference on Multimedia and Expo (ICME), pp. 2597-2602
+  short: ICME
+  year: 2023
+  type: conference
+  summary: Proposes a meta-learning defense for re-identification that trains a stochastic network with anisotropic and isotropic perturbations and a feature covariance alignment loss to resist adversarial attacks.
+  topics:
+  - reid
+  - adversarial
+  links:
+    doi: 10.1109/ICME55011.2023.00442
+
+- title: Antenna Design Optimization using GAN-based Surrogate Model
+  authors: Kainat Yasmeen, Kumar Vijay Mishra, A V Subramanyam, Shobha Sundar Ram
+  venue: URSI General Assembly and Scientific Symposium (URSI GASS), Sapporo, Japan
+  short: URSI GASS
+  year: 2023
+  type: conference
+  summary: Uses a GAN-based surrogate model, trained on a modest number of antenna designs, to optimize a Fabry-Pérot cavity antenna's reflecting-surface unit cell, validated through simulations and measurements.
+  topics:
+  - generative
+  links:
+    doi: 10.46620/ursigass.2023.3128.qkzu4883
+    url: "https://www.ursi.org/proceedings/procGA23/papers/3128.pdf"
+
+- title: Unsupervised Domain Adaptation for Person Re-identification via Individual-preserving and Environmental-switching Cyclic Generation
+  authors: A. Verma, A V Subramanyam, Z. Wang, S. Satoh, R. Shah
+  venue: IEEE Transactions on Multimedia, vol. 25, pp. 364-377
+  short: IEEE TMM
+  year: 2023
+  type: journal
+  topics:
+  - reid
+  - generative
+  links:
+    doi: 10.1109/TMM.2021.3126404
+    code: "https://github.com/Visual-Conception-Group/IPES-GAN"
+
+- title: Sinkhorn Adversarial Attack and Defense
+  authors: A V Subramanyam
+  venue: IEEE Transactions on Image Processing
+  short: IEEE TIP
+  year: 2022
+  type: journal
+  topics:
+  - adversarial
+  links:
+    pdf: /downloads/sinkhorn_attack.pdf
+    doi: 10.1109/TIP.2022.3180207
+
+- title: Barycentric Defense
+  authors: A V Subramanyam, Abhigyan Raj
+  venue: IEEE International Conference on Image Processing (ICIP)
+  short: ICIP
+  year: 2022
+  type: conference
+  topics:
+  - adversarial
+  links:
+    pdf: /downloads/Barycenter_Defense.pdf
+    doi: 10.1109/ICIP46576.2022.9897732
+    code: "https://github.com/abhigyan13/Barycentric-Defense"
+
+- title: Wasserstein Metric Attack on Person Re-Identification
+  authors: Astha Verma, A V Subramanyam, Rajiv Ratn Shah
+  venue: IEEE International Conference on Multimedia Information Processing and Retrieval (MIPR)
+  short: MIPR
+  year: 2022
+  type: conference
+  topics:
+  - reid
+  - adversarial
+  links:
+    doi: 10.1109/MIPR54900.2022.00049
+
+- title: Contextual Active Learning for Person Re-Identification
+  authors: Vineet Joshi, A V Subramanyam
+  venue: IEEE International Conference on Multimedia Information Processing and Retrieval (MIPR)
+  short: MIPR
+  year: 2022
+  type: conference
+  award: Best Paper Award
+  topics:
+  - reid
+  links:
+    doi: 10.1109/MIPR54900.2022.00052
+
+- title: Channel Graph Regularized Correlation Filters for Visual Object Tracking
+  authors: M. Jain, A. Tyagi, A V Subramanyam, S. Denman, C. Fookes and S. Sridharan
+  venue: IEEE Transactions on Circuits and Systems for Video Technology, vol. 32, no. 2, pp. 715-729
+  short: IEEE TCSVT
+  year: 2022
+  type: journal
+  topics:
+  - tracking
+  links:
+    doi: 10.1109/TCSVT.2021.3063144
+
+- title: Novel deep learning framework for wideband spectrum characterization at sub-Nyquist rate
+  authors: S. Chandhok, H. Joshi, A V Subramanyam and S. Darak
+  venue: Wireless Networks, vol. 27, pp. 4727-4746
+  short: Wireless Networks
+  year: 2021
+  type: journal
+  topics: []
+  links:
+    doi: 10.1007/s11276-021-02765-1
+    arxiv: "https://arxiv.org/abs/1912.05255"
+
+- title: "IGSSTRCF: Importance Guided Sparse Spatio-Temporal Regularized Correlation Filters For Tracking"
+  authors: Monika Jain, Arjun Tyagi, A V Subramanyam, Simon Denman, Clinton Fookes and Sridha Sridharan
+  venue: IEEE Winter Conference on Applications of Computer Vision (WACV), pp. 2774-2783
+  short: WACV
+  year: 2021
+  type: conference
+  topics:
+  - tracking
+  links:
+    doi: 10.1109/WACV48630.2021.00282
+
+- title: Disentangling Reconstruction Network for Unsupervised Cross-Domain Person Re-Identification
+  authors: Kajal Kansal, Harsh Jain, A V Subramanyam
+  venue: IEEE International Conference on Systems, Man and Cybernetics
+  short: SMC
+  year: 2021
+  type: conference
+  topics:
+  - reid
+  links:
+    doi: 10.1109/SMC52423.2021.9658739
+
+- title: "In-Sat: A Novel Land Cover Classification Dataset for Indian Subcontinent"
+  authors: M. Shah, A. V. Subramanyam and G. Arora
+  venue: IEEE International Geoscience and Remote Sensing Symposium IGARSS, pp. 6650-6653
+  short: IGARSS
+  year: 2021
+  type: conference
+  topics: []
+  links:
+    doi: 10.1109/IGARSS47720.2021.9553772
+    code: "https://github.com/Visual-Conception-Group/In-Sat"
+
+- title: Hierarchical Attention Image-Text Alignment Network For Person Re-Identification
+  authors: K. Kansal, A. Subramanyam, Z. Wang and S. Satoh
+  venue: IEEE International Conference on Multimedia & Expo Workshops (ICMEW), Shenzhen, China, pp. 1-6
+  short: ICMEW
+  year: 2021
+  type: conference
+  topics:
+  - reid
+  - vision-language
+  links:
+    doi: 10.1109/ICMEW53276.2021.9455960
+
+- title: LSTM guided ensemble correlation filter tracking with appearance model pool
+  authors: M. Jain, A V Subramanyam, S. Denman, C. Fookes and S. Sridharan
+  venue: Computer Vision and Image Understanding, vol. 195
+  short: CVIU
+  year: 2020
+  type: journal
+  topics:
+  - tracking
+  links:
+    doi: 10.1016/j.cviu.2020.102935
+
+- title: "SDL: Spectrum-Disentangled Representation Learning for Visible-Infrared Person Re-identification"
+  authors: K. Kansal, A.V. Subramanyam, Z. Wang and S. Satoh
+  venue: IEEE Transactions on Circuits and Systems for Video Technology, vol. 30, no. 10, pp. 3422-3432, Oct. 2020
+  short: IEEE TCSVT
+  year: 2020
+  type: journal
+  topics:
+  - reid
+  links:
+    doi: 10.1109/TCSVT.2019.2963721
+
+- title: Egocentric Analysis of Dash-cam Videos For Vehicle Forensics
+  authors: A. Mehrish, P. Singh, P. Jain, A.V. Subramanyam, M. Kankanhalli
+  venue: IEEE Transactions on Circuits and Systems for Video Technology, vol. 30, no. 9, pp. 3000-3014, Sept. 2020
+  short: IEEE TCSVT
+  year: 2020
+  type: journal
+  topics:
+  - forensics
+  - video
+  links:
+    doi: 10.1109/TCSVT.2019.2929561
+
+- title: Anti-forensics of Median Filtering and Contrast Enhancement
+  authors: S. Sharma, H. Ravi, A.V. Subramanyam, S. Emmanuel
+  venue: Journal of Visual Communication and Image Representation, vol. 66
+  short: JVCIR
+  year: 2019
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1016/j.jvcir.2019.102682
+
+- title: "CARF-Net: CNN attention and RNN fusion network for video-based person reidentification"
+  authors: K. Kansal, A.V. Subramanyam, D. Prasad
+  venue: Journal of Electronic Imaging, vol. 28, no. 2
+  short: JEI
+  year: 2019
+  type: journal
+  topics:
+  - reid
+  - video
+  links:
+    doi: 10.1117/1.JEI.28.2.023036
+
+- title: "HDRNet: Person Re-identification using Hybrid Sampling in Deep Reconstruction Network"
+  authors: K. Kansal, A.V. Subramanyam, M. Kankanhalli
+  venue: IEEE Access, vol. 7, pp. 40856-40865
+  short: IEEE Access
+  year: 2019
+  type: journal
+  topics:
+  - reid
+  links:
+    doi: 10.1109/ACCESS.2019.2908344
+
+- title: Joint Spatial and Discrete Cosine Transform Domain based Counter Forensics for Adaptive Contrast Enhancement
+  authors: A. Mehrish, A.V. Subramanyam, S. Emmanuel
+  venue: IEEE Access, vol. 7, pp. 27183-27195
+  short: IEEE Access
+  year: 2019
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/ACCESS.2019.2901345
+
+- title: Airborne Visual Tracking and Re-Identification System
+  authors: K. Saini, K. Kansal, A.V. Subramanyam
+  venue: JEI, vol. 28, no. 2
+  short: JEI
+  year: 2019
+  type: journal
+  topics:
+  - reid
+  - tracking
+  links:
+    doi: 10.1117/1.JEI.28.2.023003
+
+- title: Online Single and Multiple Analysis Dictionary Learning based approach for Visual Object Tracking
+  authors: D. Sitani, A.V. Subramanyam, A. Majumdar
+  venue: Journal of Electronic Imaging, vol. 28, no. 1
+  short: JEI
+  year: 2019
+  type: journal
+  topics:
+  - tracking
+  links:
+    doi: 10.1117/1.JEI.28.1.013004
+
+- title: Robust Discriminative Sub-space Learning for Person Reidentification
+  authors: A.V. Subramanyam, R. Ahuja, V. Gupta
+  venue: IEEE Signal Processing Letters, vol. 26, no. 1, pp. 154-158
+  short: IEEE SPL
+  year: 2019
+  type: journal
+  topics:
+  - reid
+  links:
+    doi: 10.1109/LSP.2018.2882301
+
+- title: Attentional Road Safety Networks
+  authors: Sonu Gupta, Deepak Srivatsav, A V Subramanyam, Ponnurangam Kumaraguru
+  venue: IEEE International Conference on Image Processing (ICIP), pp. 1600-1604
+  short: ICIP
+  year: 2019
+  type: conference
+  presentation: Poster
+  topics: []
+  links:
+    doi: 10.1109/ICIP.2019.8803732
+    arxiv: "https://arxiv.org/abs/1812.04860"
+
+- title: Autoencoder Ensemble for Person Re-Identification
+  authors: Kajal Kansal, A V Subramanyam
+  venue: IEEE International Conference on Multimedia Big Data (BigMM), pp. 257-261
+  short: BigMM
+  year: 2019
+  type: conference
+  presentation: Oral
+  topics:
+  - reid
+  links:
+    doi: 10.1109/BigMM.2019.00-15
+
+- title: Image Corpus Representative Summarization
+  authors: Anurag Singh, Lakshay Virmani, A V Subramanyam
+  venue: IEEE International Conference on Multimedia Big Data (BigMM), pp. 21-29
+  short: BigMM
+  year: 2019
+  type: conference
+  presentation: Oral
+  topics: []
+  links:
+    doi: 10.1109/BigMM.2019.00-46
+
+- title: LSTM Guided Modulation Classification and Experimental Validation for Sub-Nyquist Rate Wideband Spectrum Sensing
+  authors: S. Chandhok, H. Joshi, S. Darak, and A.V. Subramanyam
+  venue: International Conference on Communication Systems & Networks (COMSNETS)
+  short: COMSNETS
+  year: 2019
+  type: conference
+  presentation: Poster
+  topics: []
+  links:
+    doi: 10.1109/COMSNETS.2019.8711345
+
+- title: Robust PRNU estimation from probabilistic raw measurements
+  authors: A. Mehrish, A.V. Subramanyam, S. Emmanuel
+  venue: "Signal Processing: Image Communication, vol. 66, pp. 30-41"
+  short: "Signal Proc.: Image Comm."
+  year: 2018
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1016/j.image.2018.04.013
+
+- title: Transfer Learning of Spatio-Temporal Information using 3D-CNN for Person Re-identification
+  authors: K. Kansal, and A.V. Subramanyam
+  venue: IEEE International Conference on Systems, Man, and Cybernetics (SMC), pp. 923-928
+  short: SMC
+  year: 2018
+  type: conference
+  presentation: Oral
+  topics:
+  - reid
+  links:
+    doi: 10.1109/SMC.2018.00164
+
+- title: Use of facial landmarks for adaptive compression of videos on mobile devices
+  authors: R. Banerjee, G. Chikara, V. Naik, A.V. Subramanyam, and K. Dey
+  venue: International Conference on Communication Systems & Networks (COMSNETS), pp. 320-327
+  short: COMSNETS
+  year: 2018
+  type: conference
+  presentation: Oral
+  topics:
+  - video
+  links:
+    doi: 10.1109/COMSNETS.2018.8328214
+
+- title: "#VisualHashtags: Visual Summarization of Social Media Events Using Mid-Level Visual Elements"
+  authors: S. Goel, S. Ahuja, A.V. Subramanyam, and P. Kumaraguru
+  venue: ACM International Conference on Multimedia (ACM MM), pp. 1434-1442
+  short: ACM MM
+  year: 2017
+  type: conference
+  presentation: Poster
+  topics: []
+  links:
+    doi: 10.1145/3123266.3123407
+
+- title: Multimedia Signatures for Vehicle Forensics
+  authors: A. Mehrish, A.V. Subramanyam, and M.S. Kankanhalli
+  venue: IEEE International Conference on Multimedia and Expo (ICME), pp. 685-690
+  short: ICME
+  year: 2017
+  type: conference
+  presentation: Poster
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/ICME.2017.8019488
+
+- title: Online SVM and Backward Model Validation Based Visual Tracking
+  authors: D. Mullick, A.V. Subramanyam, and S. Emmanuel
+  venue: IEEE International Conference on Image Processing (ICIP), pp. 4327-4331
+  short: ICIP
+  year: 2017
+  type: conference
+  presentation: Poster
+  topics:
+  - tracking
+  links:
+    doi: 10.1109/ICIP.2017.8297099
+
+- title: Sensor Pattern Noise Estimation Using Probabilistically Estimated RAW Values
+  authors: A. Mehrish, A.V. Subramanyam, S. Emmanuel
+  venue: IEEE Signal Processing Letters, vol. 23, no. 5, pp. 693-697
+  short: IEEE SPL
+  year: 2016
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/LSP.2016.2549059
+
+- title: Forensic Analysis of Linear and Non Linear Image Filtering using Quantization Noise
+  authors: H. Ravi, A.V. Subramanyam, S. Emmanuel
+  venue: "ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), vol. 12, no. 3, pp. 39:1-39:23"
+  short: ACM TOMM
+  year: 2016
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1145/2857069
+
+- title: Anti-Forensic Technique for Median Filtering using L1-L2 TV Model
+  authors: S. Sharma, A.V. Subramanyam, M. Jain, A. Mehrish and S. Emmanuel
+  venue: "IEEE International Workshop on Information Forensics and Security (WIFS). Pages: 6"
+  short: WIFS
+  year: 2016
+  type: conference
+  presentation: Oral
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/WIFS.2016.7823571
+
+- title: "PicHunt: Social Media Image Retrieval for Improved Law Enforcement"
+  authors: S. Goel, N. Sachdeva, P. Kumaraguru, A.V. Subramanyam and D. Gupta
+  venue: International Conference on Social Informatics (SocInfo), pp. 206-223
+  short: SocInfo
+  year: 2016
+  type: conference
+  presentation: Poster
+  topics: []
+  links:
+    doi: 10.1007/978-3-319-47880-7_13
+    arxiv: "https://arxiv.org/abs/1608.00905"
+
+- title: Face Video Based Touchless Blood Pressure and Heart Rate Estimation
+  authors: M. Jain, S. Deb, A.V. Subramanyam
+  venue: "IEEE International Workshop on Multimedia Signal Processing (MMSP). Pages: 5"
+  short: MMSP
+  year: 2016
+  type: conference
+  presentation: Poster
+  topics:
+  - video
+  links:
+    doi: 10.1109/MMSP.2016.7813389
+
+- title: Video inpainting detection and localization using inconsistencies in optical flow
+  authors: Shobhita Saxena, A.V. Subramanyam, Hareesh Ravi
+  venue: IEEE Region 10 Conference (TENCON), Singapore, pp. 1361-1365
+  short: TENCON
+  year: 2016
+  type: conference
+  summary: Proposes a two-stage passive method that uses optical flow consistency to detect whether a video has been inpainted and to temporally localize the forgery, tested on PETS and SULFA.
+  topics:
+  - forensics
+  - video
+  links:
+    doi: 10.1109/TENCON.2016.7848236
+
+- title: ACE - An Effective Anti-forensic Contrast Enhancement Technique
+  authors: H. Ravi, A.V. Subramanyam, S. Emmanuel
+  venue: IEEE Signal Processing Letters, vol. 23, no. 2, pp. 212-216
+  short: IEEE SPL
+  year: 2015
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/LSP.2015.2509477
+
+- title: Spatial domain quantization noise based image filtering detection
+  authors: H. Ravi, A.V. Subramanyam, S. Emmanuel
+  venue: IEEE International Conference on Image Processing (ICIP), Quebec City, Canada, pp. 1180-1184
+  short: ICIP
+  year: 2015
+  type: conference
+  presentation: Oral
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/ICIP.2015.7350986
+
+- title: Partially Compress-Encrypted Domain Robust JPEG Image Watermarking
+  authors: A.V. Subramanyam and S. Emmanuel
+  venue: Multimedia Tools and Applications, vol. 71, no. 3, pp. 1311-1331
+  short: MTAP
+  year: 2014
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1007/s11042-012-1272-0
+
+- title: Compression Noise Based Video Forgery Detection
+  authors: H. Ravi, A.V. Subramanyam, Gaurav Gupta and B. Avinash Kumar
+  venue: IEEE International Conference on Image Processing (ICIP), Paris, France, pp. 5353-5356
+  short: ICIP
+  year: 2014
+  type: conference
+  presentation: Poster
+  topics:
+  - forensics
+  - video
+  links:
+    doi: 10.1109/ICIP.2014.7026083
+
+- title: Cryptanalysis of a Digital Watermarking Scheme Based on Support Vector Regression
+  authors: M. Siddula, S. Sanadhya and A.V. Subramanyam
+  venue: IEEE International Conference on Systems, Man and Cybernetics (SMC), Manchester, UK, pp. 1554-1559
+  short: SMC
+  year: 2013
+  type: conference
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/SMC.2013.268
+
+- title: Pixel Estimation Based Video Forgery Detection
+  authors: A.V. Subramanyam and S. Emmanuel
+  venue: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Vancouver, Canada, pp. 3038-3042
+  short: ICASSP
+  year: 2013
+  type: conference
+  presentation: Poster
+  topics:
+  - forensics
+  - video
+  links:
+    doi: 10.1109/ICASSP.2013.6638216
+
+- title: Video Forgery Detection using HOG and Video Compression Properties
+  authors: A.V. Subramanyam and S. Emmanuel
+  venue: IEEE International Workshop on Multimedia Signal Processing (MMSP), Banff, Canada, pp. 89-94
+  short: MMSP
+  year: 2012
+  type: conference
+  presentation: Poster
+  topics:
+  - forensics
+  - video
+  links:
+    doi: 10.1109/MMSP.2012.6343421
+
+- title: Audio Watermarking in Partially Compressed-Encrypted Domain
+  authors: A.V. Subramanyam and S. Emmanuel
+  venue: IEEE International Conference on Systems, Man and Cybernetics (SMC), Seoul, South Korea, pp. 2867-2872
+  short: SMC
+  year: 2012
+  type: conference
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/ICSMC.2012.6378184
+
+- title: Robust Watermarking of Compressed and Encrypted JPEG2000 Images
+  authors: A.V. Subramanyam, S. Emmanuel and M.S. Kankanhalli
+  venue: IEEE Transactions on Multimedia, vol. 14, no. 3, pp. 703-716
+  short: IEEE TMM
+  year: 2011
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/TMM.2011.2181342
+
+- title: Robust Watermarking of Compressed JPEG images in Encrypted Domain
+  authors: A.V. Subramanyam and S. Emmanuel
+  venue: Transactions on Data Hiding and Multimedia Security, LNCS, vol. 6730, pp. 37-57
+  short: LNCS TDHMS
+  year: 2011
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1007/978-3-642-24556-5_3
+
+- title: Context Based Watermarking of Secure JPEG-LS Images
+  authors: A.V. Subramanyam and S. Emmanuel
+  venue: International Conference on Signal Processing and Multimedia Applications(SIGMAP), Seville, Spain
+  short: SIGMAP
+  year: 2011
+  type: conference
+  topics:
+  - forensics
+  links:
+    doi: 10.5220/0003446201610166
+
+- title: Compressed Encrypted Domain JPEG2000 Image Watermarking
+  authors: A.V. Subramanyam, S. Emmanuel and M.S. Kankanhalli
+  venue: IEEE International Conference Multimedia and Expo (ICME), Singapore, pp. 1315-1320
+  short: ICME
+  year: 2010
+  type: conference
+  presentation: Poster
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/ICME.2010.5583571
+
+- title: Joint Watermarking Scheme for Multiparty Multilevel DRM Architecture
+  authors: T. Thomas, S. Emmanuel, A.V. Subramanyam and M.S. Kankanhalli
+  venue: IEEE Transactions on Information Forensics and Security, vol. 4, no. 4, pp. 758-767
+  short: IEEE TIFS
+  year: 2009
+  type: journal
+  topics:
+  - forensics
+  links:
+    doi: 10.1109/TIFS.2009.2033229

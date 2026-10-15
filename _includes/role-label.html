@@ -1,0 +1,25 @@
+{%- comment -%}
+  A person's role as shown on the Team page and the home page.
+  Usage: {% include role-label.html person=m %}  or, shorter for the home page strip,
+         {% include role-label.html person=m short=true %}
+  Uses `program` when set (e.g. "MTech (Research)"), otherwise the role.
+{%- endcomment -%}
+{%- assign r = include.person -%}
+{%- if r.role == "faculty" -%}
+  {{- r.title | default: "Faculty" -}}{%- if include.short and r.pi %}, PI{% endif -%}
+{%- else -%}
+  {%- if r.program -%}{{- r.program -}}
+  {%- else -%}
+    {%- case r.role -%}
+      {%- when "postdoc" -%}{% if include.short %}Postdoc{% else %}Postdoctoral researcher{% endif %}
+      {%- when "phd" -%}PhD
+      {%- when "masters" -%}Master's
+      {%- when "bachelors" -%}Bachelor's
+      {%- when "ra" -%}Research assistant
+      {%- else -%}{{ r.role | capitalize }}
+    {%- endcase -%}
+  {%- endif -%}
+  {%- if r.status == "current" and include.short != true -%}{%- unless r.role == "ra" or r.role == "postdoc" %} student{% endunless -%}{%- endif -%}
+  {%- if r.status == "current" and r.since -%}{% if include.short %}, since {% else %} · since {% endif %}{{ r.since }}{%- endif -%}
+  {%- if r.status == "alumni" and r.until %} · {{ r.until }}{%- endif -%}
+{%- endif -%}

@@ -1,11 +1,70 @@
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl | prepend: site.url}}">
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-<!-- <link rel="shortcut icon" type ="image/x-icon" href="{{ site.url }}{{ site.baseurl }}/images/favicon.ico"> -->
-
+  {%- comment -%}
+    Runs before the page is drawn: marks that JavaScript is on (the stylesheet reserves space for
+    the word cloud), and applies a light/dark theme the visitor picked earlier (assets/js/theme.js),
+    so the page never flashes in the other theme.
+  {%- endcomment %}
+  <script>
+    (function (root) {
+      root.classList.add('js');
+      try {
+        var theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') root.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })(document.documentElement);
+  </script>
+  {%- if page.url == "/" -%}
+    {%- assign page_title = site.home_title | default: site.title -%}
+  {%- else -%}
+    {%- capture page_title -%}{{ page.title }} · {{ site.title }}, {{ site.institute.short }}{%- endcapture -%}
+  {%- endif %}
+  <title>{{ page_title | escape }}</title>
+  {%- comment -%}
+    jekyll-seo-tag writes the description, canonical URL, Open Graph / Twitter tags and schema.org
+    data from _config.yml and each page's title/description/image. title=false keeps the <title> above.
+  {%- endcomment %}
+  {% seo title=false %}
+  {%- comment -%}
+    Size and description of the default link-preview image (assets/img/og-image.jpg, 1200x630),
+    so Facebook and others can show it on the first share. Pages that set their own image: skip this.
+  {%- endcomment %}
+  {%- if page.image == "/assets/img/og-image.jpg" %}
+  {%- capture og_alt %}{{ site.title }}, {{ site.institute.short }}{% endcapture %}
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ og_alt | escape }}">
+  <meta name="twitter:image:alt" content="{{ og_alt | escape }}">
+  {%- endif %}
+  {%- if page.robots %}
+  <meta name="robots" content="{{ page.robots }}">
+  {%- endif %}
+  {%- comment -%} Copies of --bg (light, then dark) from assets/css/main.css: change them together. The browser uses these until assets/js/theme.js runs, which then follows --bg. {%- endcomment %}
+  <meta name="theme-color" content="#f6f8fc" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f141c" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="any">
+  <link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+  {%- comment -%} The hero photo is the largest thing on the home page; phones get the smaller file. {%- endcomment %}
+  {%- if page.url == "/" and site.hero.background %}
+  {%- if site.hero.background_small %}
+  <link rel="preload" as="image" href="{{ site.hero.background_small | relative_url }}" media="(max-width: 760px)" fetchpriority="high">
+  <link rel="preload" as="image" href="{{ site.hero.background | relative_url }}" media="(min-width: 761px)" fetchpriority="high">
+  {%- else %}
+  <link rel="preload" as="image" href="{{ site.hero.background | relative_url }}" fetchpriority="high">
+  {%- endif %}
+  {%- endif %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  {%- comment -%} Without JavaScript the filters can't run, so show the preprints that start hidden. {%- endcomment %}
+  <noscript><style>.pub-preprints[hidden] { display: grid !important; }</style></noscript>
+  {%- if page.schema %}
+  {% include {{ page.schema }} %}
+  {%- endif %}
+  {%- if site.google_analytics and jekyll.environment == "production" %}
+  {% include analytics.html %}
+  {%- endif %}
 </head>

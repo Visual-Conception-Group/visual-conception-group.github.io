@@ -1,0 +1,153 @@
+---
+layout: default
+title: Publications
+permalink: /publications/
+description: >-
+  Publications of the Visual Conception Group, IIIT Delhi: papers at NeurIPS, ECCV, BMVC, ICASSP,
+  IEEE TIP and TCSVT, with PDFs, code and BibTeX.
+schema: schema-publications.html
+redirect_from:
+  - /research/
+citations: true
+scripts: [publications.js, pub-details.js]
+---
+{%- assign pubs = site.data.publications -%}
+{%- comment -%}
+  Preprints get their own group at the top; counts and the chart cover published papers only.
+  The group starts hidden (the default view shows published papers) so the list doesn't jump
+  when publications.js runs; the "Preprints" filter shows it, and so does a browser without JavaScript.
+{%- endcomment -%}
+{%- assign preprints = pubs | where: "type", "preprint" -%}
+{%- assign published = pubs | where_exp: "p", "p.type != 'preprint'" -%}
+{%- assign by_year = published | group_by: "year" | sort: "name" | reverse -%}
+{%- comment -%}
+  Year range and chart scale use only real years, so a paper with a missing or mistyped
+  year can't stretch the chart; that paper is still listed, under "Year not set".
+{%- endcomment -%}
+{%- assign newest = 0 -%}{%- assign oldest = 0 -%}{%- assign ymax = 1 -%}
+{%- for g in by_year -%}
+  {%- assign n = g.name | plus: 0 -%}
+  {%- if g.name.size == 4 and n > 1900 -%}
+    {%- if n > newest -%}{%- assign newest = n -%}{%- endif -%}
+    {%- if oldest == 0 or n < oldest -%}{%- assign oldest = n -%}{%- endif -%}
+    {%- if g.size > ymax -%}{%- assign ymax = g.size -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+
+<div class="wrap page">
+  <header class="page-head pubs-head">
+    <div>
+      <p class="eyebrow">Research output</p>
+      <h1>Publications</h1>
+      <p class="lede"><a href="{{ site.links.scholar }}">Google Scholar profile</a></p>
+    </div>
+
+    {%- comment -%} Papers per year, stacked by type. Every year in the range gets a column so gaps are visible. {%- endcomment -%}
+    {%- assign rem = ymax | modulo: 2 -%}{%- if rem == 1 -%}{%- assign ymax = ymax | plus: 1 -%}{%- endif -%}
+    {%- assign ymid = ymax | divided_by: 2 %}
+    <figure class="year-chart" aria-labelledby="year-chart-title">
+      <figcaption>
+        <span id="year-chart-title">Papers per year</span>
+        <span class="legend"><span class="key key-journal"></span>Journal <span class="key key-conference"></span>Conference</span>
+      </figcaption>
+      <div class="yc-plot" style="--ymax: {{ ymax }}">
+        <div class="yc-grid" aria-hidden="true">
+          <span style="--v: {{ ymax }}">{{ ymax }}</span><span style="--v: {{ ymid }}">{{ ymid }}</span><span style="--v: 0">0</span>
+        </div>
+        {%- assign span = newest | minus: oldest | plus: 1 -%}
+        {%- assign half = span | divided_by: 2 %}
+        <ol class="yc-bars">
+          {%- for y in (oldest..newest) %}
+          {%- assign in_year = published | where: "year", y -%}
+          {%- assign j = in_year | where: "type", "journal" | size -%}
+          {%- assign t = in_year.size -%}
+          {%- assign c = t | minus: j %}
+          {%- comment -%} Tooltips open towards the middle of the chart so they never stick out of the page. {%- endcomment %}
+          <li class="{% if forloop.index > half %}yc-right{% else %}yc-left{% endif %}">
+            {%- if t > 0 %}
+            <a href="#y{{ y }}" class="yc-col" style="--j: {{ j }}; --c: {{ c }}">
+              <span class="yc-tip">{{ y }}: {{ t }} paper{% if t != 1 %}s{% endif %}<br>{{ j }} journal · {{ c }} conference</span>
+              {%- if c > 0 %}<span class="yc-seg yc-conference"></span>{% endif %}
+              {%- if j > 0 %}<span class="yc-seg yc-journal"></span>{% endif %}
+            </a>
+            {%- else %}
+            <span class="yc-col yc-empty"><span class="yc-tip">{{ y }}: no papers</span></span>
+            {%- endif %}
+            {%- comment -%} Label every fifth year and the newest one, but skip a fifth year that sits right next to the newest. {%- endcomment -%}
+            {%- assign yy = y | modulo: 5 -%}
+            {%- assign to_end = newest | minus: y -%}
+            <span class="yc-year{% if y != newest %}{% if yy != 0 or to_end < 3 %} yc-minor{% endif %}{% endif %}">{{ y }}</span>
+          </li>
+          {%- endfor %}
+        </ol>
+      </div>
+      <details class="yc-table">
+        <summary>Show as table</summary>
+        <table>
+          <thead><tr><th scope="col">Year</th><th scope="col">Journal</th><th scope="col">Conference</th><th scope="col">Total</th></tr></thead>
+          <tbody>
+            {%- for g in by_year %}
+            {%- assign j = g.items | where: "type", "journal" | size -%}
+            {%- assign c = g.size | minus: j -%}
+            {%- assign gid = g.name | default: "undated" %}
+            <tr><th scope="row"><a href="#y{{ gid }}">{{ g.name | default: "Year not set" }}</a></th><td>{{ j }}</td><td>{{ c }}</td><td>{{ g.size }}</td></tr>
+            {%- endfor %}
+          </tbody>
+        </table>
+      </details>
+    </figure>
+  </header>
+
+  <form class="pub-filters" role="search" aria-label="Filter publications" onsubmit="return false">
+    <label class="search">
+      <span class="visually-hidden">Search titles, authors and venues</span>
+      <input id="pub-search" type="search" placeholder="Search titles, authors, venues" autocomplete="off">
+    </label>
+    <div class="filter-row">
+    <fieldset class="chips" id="pub-type">
+      <legend class="visually-hidden">Type</legend>
+      <label><input type="radio" name="type" value="" checked> Published</label>
+      <label><input type="radio" name="type" value="journal"> Journal</label>
+      <label><input type="radio" name="type" value="conference"> Conference</label>
+      {%- if preprints.size > 0 %}
+      <label><input type="radio" name="type" value="preprint"> Preprints</label>
+      {%- endif %}
+    </fieldset>
+    </div>
+    <fieldset class="chips chips-topics" id="pub-topic">
+      <legend class="visually-hidden">Topic</legend>
+      <label><input type="radio" name="topic" value="" checked> All topics</label>
+      {%- for t in site.data.topics %}
+      {%- assign n = published | where_exp: "p", "p.topics contains t.id" | size %}
+      <label><input type="radio" name="topic" value="{{ t.id }}" data-title="{{ t.title | escape }}"> {{ t.title }} <span class="chip-count">{{ n }}</span></label>
+      {%- endfor %}
+    </fieldset>
+    <p class="pub-count"><span id="pub-count" aria-live="polite">Showing all {{ published.size }} published papers</span> <button type="button" class="pub-word-clear" id="pub-word-clear" hidden>Clear word</button></p>
+  </form>
+
+  <div class="pub-years">
+    {%- if preprints.size > 0 %}
+    <section class="pub-year-group pub-preprints" id="preprints" aria-labelledby="h-preprints" hidden>
+      <h2 class="year-label" id="h-preprints">Preprints</h2>
+      <div class="pub-list">
+        {%- for p in preprints %}
+        {% include pub.html pub=p %}
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+    {%- for g in by_year %}
+    {%- assign gid = g.name | default: "undated" %}
+    <section class="pub-year-group" id="y{{ gid }}" aria-labelledby="h{{ gid }}">
+      <h2 class="year-label" id="h{{ gid }}">{{ g.name | default: "Year not set" }}</h2>
+      <div class="pub-list">
+        {%- for p in g.items %}
+        {% include pub.html pub=p %}
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endfor %}
+    <p class="pub-empty" id="pub-empty" hidden>No papers match. <button type="button" id="pub-reset">Clear filters</button></p>
+  </div>
+</div>

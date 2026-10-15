@@ -1,0 +1,8 @@
+{%- comment -%}
+  One news item. Usage: {% include news-item.html item=item %}
+  Dates should be a single day, e.g. "14 October 2026" or 2026-10-14.
+{%- endcomment -%}
+<li>
+  <time datetime="{{ include.item.date | date: '%Y-%m-%d' }}">{{ include.item.date | date: "%d %b %Y" }}</time>
+  <span>{{ include.item.headline | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>
+</li>

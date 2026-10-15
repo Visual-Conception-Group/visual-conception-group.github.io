@@ -1,42 +1,147 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
+# ---------------------------------------------------------------------------
+# Site settings. Most day-to-day edits happen in _data/ instead:
+#   news.yml, publications.yml, people.yml, projects.yml
+# Restart `bundle exec jekyll serve` after editing this file.
+# ---------------------------------------------------------------------------
 
-# Site settings
 title: Visual Conception Group
-email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Website of the Visual Conception Group
+short_title: VCG
+# Browser-tab and search-result title of the home page (keep it under ~60 characters).
+home_title: Visual Conception Group · IIIT Delhi
+# Shown in search results and link previews for the home page (keep it under ~160 characters).
+description: >-
+  Computer vision group at IIIT Delhi led by Prof. A V Subramanyam: image synthesis and editing,
+  re-identification, adversarial robustness and forensics.
+url: "https://vcg.iiitd.edu.in"
 baseurl: ""
-url: ""
+lang: en_US
 
+# Search engines and link previews (used by jekyll-seo-tag).
+logo: /assets/img/logo.png
+social:
+  name: Visual Conception Group
+  links:
+    - https://github.com/Visual-Conception-Group
+# Add verification codes here after registering the site with Google Search Console / Bing.
+# webmaster_verifications:
+#   google: xxxxxxxx
+defaults:
+  - scope:
+      path: ""
+    values:
+      # Link-preview image. _includes/head.html adds its size (1200x630) for this file only,
+      # so if you replace it, keep the same size or update head.html.
+      image: /assets/img/og-image.jpg
+  # Old job ads: kept for the news archive, but not offered to search engines.
+  - scope:
+      path: "downloads/Research_Assistant*"
+    values:
+      sitemap: false
+
+institute:
+  name: Indraprastha Institute of Information Technology Delhi
+  short: IIIT Delhi
+  url: https://www.iiitd.ac.in/
+
+# Home page hero.
+# background: optional photo behind the top of the home page, a wide JPEG of about 1600x800
+#   (keep it under ~200 KB; it is the biggest download on the page).
+# background_small: the same photo at about 960x480, used on phones.
+# eyebrow: the small line above the headline. It is the page's main heading for search
+#   engines, so keep the lab's name and IIIT Delhi in it.
+# headline: set in a light weight; *word* is highlighted.
+hero:
+  background: /images/campus/hero-rnd-block-night-gardens.jpg
+  background_small: /images/campus/hero-rnd-block-night-gardens-960.jpg
+  eyebrow: Visual Conception Group · IIIT Delhi
+  headline: Teaching machines where to *look*, and when not to trust what they see.
+  intro: >-
+    We develop methods that enable machines to recognise, understand and generate visual
+    content. Our research connects visual recognition, generative modelling and adversarial
+    robustness, advancing how vision systems interpret the world and how reliably they operate.
+    Recent work explores diffusion and flow models for text-driven image editing,
+    reference-guided generation and relighting. Our broader interests include person and
+    vehicle re-identification, adversarial attacks and defenses, vision–language learning and
+    multimedia forensics.
+
+# How many items the home page shows.
+home:
+  recent_publications: 6
+  news: 5
+
+links:
+  scholar: https://scholar.google.co.in/citations?user=aPDRgKAAAAAJ&hl=en
+  github: https://github.com/Visual-Conception-Group
+
+contact:
+  email: subramanyam@iiitd.ac.in
+  address:
+    - B-415, R&D Block
+    - Indraprastha Institute of Information Technology Delhi
+    - Okhla Industrial Estate, Phase III
+    - New Delhi 110020, India
+  map: https://goo.gl/maps/ehpdTjcbu2pUCLr18
+  # The same address in parts, for search engines (schema.org).
+  postal:
+    street: B-415, R&D Block, IIIT Delhi, Okhla Industrial Estate, Phase III
+    locality: New Delhi
+    region: Delhi
+    postal_code: "110020"
+    country: IN
+
+# Shown under the collaborator logos on the home page (Markdown: [text](link)).
+funding: >-
+  Our research is funded by government agencies including the
+  [Department of Science and Technology (DST)](https://dst.gov.in/) and the
+  [Ministry of Electronics and Information Technology (MeitY)](https://www.meity.gov.in/).
+
+collaborators:
+  - name: National University of Singapore
+    logo: /images/logopic/NUS.png
+    url: https://www.nus.edu.sg/
+  - name: Queensland University of Technology
+    logo: /images/logopic/QUT.png
+    url: https://www.qut.edu.au/
+  - name: National Institute of Informatics, Japan
+    logo: /images/logopic/NII.jpeg
+    url: https://www.nii.ac.jp/en/
+  - name: UiT The Arctic University of Norway
+    logo: /images/logopic/UIT.png
+    url: https://en.uit.no/
+
+# Citation badges on publications (home page and /publications/), from https://badge.dimensions.ai.
+# Papers need a doi (or an arxiv link) in _data/publications.yml to get a badge.
+citations:
+  dimensions: true
+
+google_analytics: G-FN49Q5D2S7
+
+# ---------------------------------------------------------------------------
+# Build settings (GitHub Pages compatible; no custom plugins).
+# ---------------------------------------------------------------------------
 include:
-  - .htaccess
   - _pages
+exclude:
+  - README.md
+  - build.sh
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - vendor
+  - .jekyll-cache
 
-sass:
-  sass_dir: _sass
+# Stops GitHub Pages from adding its default theme (jekyll-theme-primer) and its unused stylesheet.
+theme: null
 
-# Conversion
+# Plugins that GitHub Pages supports out of the box.
+plugins:
+  - jekyll-seo-tag        # title, description, canonical URL, link-preview and schema.org tags
+  - jekyll-sitemap        # /sitemap.xml
+  - jekyll-redirect-from  # redirect_from: in a page's front matter
+
 markdown: kramdown
-highlighter: rouge
-lsi: false
-excerpt_separator: "\n\n"
-incremental: true
-
-
-
-# Markdown Processing
 kramdown:
   input: GFM
   hard_wrap: false
   auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
-  enable_coderay: false
-  parse_block_html: true # default for kramdown is false. This will enable using Markdown links

@@ -1,0 +1,44 @@
+{%- comment -%}
+  Word cloud of the most frequent words in paper titles (home page hero).
+  Usage: {% include word-cloud.html pubs=published %}
+  Settings (number of words, stop words, merged spellings) are in _data/wordcloud.yml.
+  The words are counted here, at build time (once per title). Each word links to
+  /publications/?word=<word>,<merged spellings>, which publications.js matches against title
+  words with the same rules, so the counts and the results agree. assets/js/word-cloud.js packs them into
+  a cloud; without JavaScript they show as a simple wrapped list.
+{%- endcomment -%}
+{%- assign wc = site.data.wordcloud -%}
+{%- assign stop = wc.stopwords -%}
+{%- comment -%} Each word counts once per title, so "in N paper titles" is exact. {%- endcomment -%}
+{%- assign words = "" | split: "" -%}
+{%- for p in include.pubs -%}
+  {%- assign t = p.title | downcase | replace: ":", " " | replace: ",", " " | replace: "(", " " | replace: ")", " " | replace: "?", " " | replace: "#", " " | replace: ".", " " | replace: '"', " " | replace: "'", " " -%}
+  {%- assign title_words = "" | split: "" -%}
+  {%- assign tokens = t | split: " " -%}
+  {%- for token in tokens -%}
+    {%- assign w = token | strip -%}
+    {%- if w.size < 3 or stop contains w -%}{%- continue -%}{%- endif -%}
+    {%- if wc.merge[w] -%}{%- assign w = wc.merge[w] -%}{%- endif -%}
+    {%- assign title_words = title_words | push: w -%}
+  {%- endfor -%}
+  {%- assign title_words = title_words | uniq -%}
+  {%- for w in title_words -%}{%- assign words = words | push: w -%}{%- endfor -%}
+{%- endfor -%}
+{%- assign counted = words | group_by_exp: "w", "w" | sort: "size" | reverse -%}
+{%- assign top = counted.first.size | default: 1 -%}
+{%- assign shown = 0 %}
+<figure class="cloud-figure">
+  <div class="cloud" id="word-cloud">
+    {%- for g in counted -%}
+      {%- if shown >= wc.max_words or g.size < wc.min_count -%}{%- break -%}{%- endif -%}
+      {%- assign shown = shown | plus: 1 -%}
+      {%- if shown <= 3 -%}{%- assign tier = 1 -%}{%- elsif shown <= 10 -%}{%- assign tier = 2 -%}{%- elsif shown <= 22 -%}{%- assign tier = 3 -%}{%- else -%}{%- assign tier = 4 -%}{%- endif -%}
+      {%- assign weight = g.size | times: 1.0 | divided_by: top -%}
+      {%- comment -%} The link lists the word and every spelling merged into it, so the publications page finds the same titles. {%- endcomment -%}
+      {%- assign spellings = g.name -%}
+      {%- for pair in wc.merge -%}{%- if pair[1] == g.name -%}{%- assign spellings = spellings | append: "," | append: pair[0] -%}{%- endif -%}{%- endfor %}
+    <a class="cloud-word tier-{{ tier }}" href="{{ '/publications/' | relative_url }}?word={{ spellings | url_encode }}" data-count="{{ g.size }}" style="--w: {{ weight | round: 3 }}" title="{{ g.name }}: in {{ g.size }} paper titles">{{ g.name }}</a>
+    {%- endfor %}
+  </div>
+  <figcaption>The words that appear most often in the titles of our papers. Select one to see those papers.</figcaption>
+</figure>

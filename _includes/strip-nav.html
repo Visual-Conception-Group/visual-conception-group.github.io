@@ -1,0 +1,9 @@
+{%- comment -%}
+  Previous/next buttons for a row that scrolls sideways on desktop (see assets/js/scroll-strip.js).
+  Usage: {% include strip-nav.html for="id-of-the-row" label="people" %}
+  Hidden until the script finds that the row is wider than the screen.
+{%- endcomment -%}
+<span class="strip-nav" data-for="{{ include.for }}" hidden>
+  <button type="button" class="strip-btn" data-dir="-1" aria-controls="{{ include.for }}" aria-label="Scroll {{ include.label }} left">←</button>
+  <button type="button" class="strip-btn" data-dir="1" aria-controls="{{ include.for }}" aria-label="Scroll {{ include.label }} right">→</button>
+</span>

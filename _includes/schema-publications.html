@@ -1,0 +1,41 @@
+{%- comment -%} schema.org data for the publications page: every published paper as a ScholarlyArticle. {%- endcomment -%}
+{%- assign published = site.data.publications | where_exp: "p", "p.type != 'preprint'" -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": {{ "Publications of the " | append: site.title | jsonify }},
+  "numberOfItems": {{ published.size }},
+  "itemListElement": [
+    {%- for p in published %}
+    {%- assign l = p.links -%}
+    {%- assign doi = l.doi | split: "doi.org/" | last | remove: "DOI:" | remove: "doi:" | strip -%}
+    {%- assign names = p.authors | remove: "*" | replace: ", and ", ", " | replace: " and ", ", " | split: ", " %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.index }},
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": {{ p.title | jsonify }},
+        "author": [{% for n in names %}{ "@type": "Person", "name": {{ n | strip | jsonify }} }{% unless forloop.last %}, {% endunless %}{% endfor %}]
+        {%- if p.year %},
+        "datePublished": {{ p.year | append: "" | jsonify }}{% endif %}
+        {%- if p.venue %},
+        "isPartOf": { "@type": "CreativeWork", "name": {{ p.venue | jsonify }} }{% endif %}
+        {%- if doi != "" %},
+        "identifier": { "@type": "PropertyValue", "propertyID": "DOI", "value": {{ doi | jsonify }} },
+        "url": {{ "https://doi.org/" | append: doi | jsonify }}{% elsif l.url %},
+        "url": {{ l.url | jsonify }}{% elsif l.arxiv %},
+        "url": {{ l.arxiv | jsonify }}{% endif %}
+        {%- if l.arxiv and doi != "" %},
+        "sameAs": [{{ l.arxiv | jsonify }}]{% endif %}
+        {%- if p.summary %},
+        "description": {{ p.summary | strip | jsonify }}{% endif %}
+        {%- if p.abstract %},
+        "abstract": {{ p.abstract | strip | jsonify }}{% endif %}
+      }
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>

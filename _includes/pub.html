@@ -1,0 +1,70 @@
+{%- comment -%}
+  One publication. Usage: {% include pub.html pub=p %}
+  Every field except title and authors is optional; see the template at the top of _data/publications.yml.
+{%- endcomment -%}
+{%- assign p = include.pub -%}
+{%- assign l = p.links -%}
+{%- comment -%} Accept "10.1109/x", "https://doi.org/10.1109/x" or "DOI: 10.1109/x". {%- endcomment -%}
+{%- assign doi = l.doi | split: "doi.org/" | last | remove: "DOI:" | remove: "doi:" | strip -%}
+{%- comment -%} Anything that isn't a journal or preprint counts as a conference paper. {%- endcomment -%}
+{%- assign ptype = p.type | downcase | strip -%}
+{%- unless ptype == "journal" or ptype == "preprint" -%}{%- assign ptype = "conference" -%}{%- endunless -%}
+{%- capture primary -%}
+  {%- if l.pdf -%}{% include link-url.html url=l.pdf %}
+  {%- elsif doi != "" -%}https://doi.org/{{ doi }}
+  {%- elsif l.url -%}{{ l.url }}
+  {%- elsif l.arxiv -%}{{ l.arxiv }}
+  {%- elsif l.project -%}{{ l.project }}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture metric_doi -%}{% include metric-doi.html links=l %}{%- endcapture -%}
+{%- assign pid = p.title | slugify | truncate: 60, "" -%}
+{%- capture search_text -%}{{ p.title }} {{ p.authors }} {{ p.venue }} {{ p.short }} {{ p.year }} {{ p.status }} {{ p.summary }} {{ p.abstract }}{%- endcapture -%}
+{%- capture badge -%}
+  {%- if p.short -%}{{ p.short }}{%- elsif ptype == "preprint" -%}Preprint{%- else -%}{{ ptype | capitalize }}{%- endif -%}
+{%- endcapture -%}
+<article class="pub" id="pub-{{ pid }}" data-doi="{{ metric_doi }}" data-type="{{ ptype }}" data-topics="{{ p.topics | join: ' ' | replace: ',', ' ' }}" data-search="{{ search_text | downcase | strip_html | escape }}">
+  <p class="pub-venue-tag">
+    <span class="badge badge-{{ ptype }}">{{ badge }}</span>
+    {%- if p.year %}<span class="pub-year">{{ p.year }}</span>{% endif %}
+    {%- if p.award %}<span class="award">{{ p.award }}</span>{% endif %}
+    {%- if p.status and p.status != "accepted" %}<span class="pub-status"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5V8l2.5 1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>{{ p.status }}</span>{% endif %}
+  </p>
+  <h3 class="pub-title">
+    {%- if primary != "" -%}<a href="{{ primary }}">{{ p.title }}</a>{%- else -%}{{ p.title }}{%- endif -%}
+  </h3>
+  <p class="pub-authors">{% include authors.html authors=p.authors %}</p>
+  {%- if p.venue or p.presentation or p.status == "accepted" %}
+  <p class="pub-venue">{{ p.venue }}{% if p.presentation %}{% if p.venue %} · {% endif %}{{ p.presentation }}{% endif %}{% if p.status == "accepted" %}{% if p.venue or p.presentation %} · {% endif %}to appear{% endif %}</p>
+  {%- endif %}
+  {%- if p.authors contains "*" %}
+  <p class="pub-note">* Equal contribution</p>
+  {%- endif %}
+  {%- if p.summary %}
+  <p class="pub-summary">{{ p.summary }}</p>
+  {%- endif %}
+  <ul class="pub-links" aria-label="Links for {{ p.title | escape }}">
+    {%- if p.abstract %}<li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-{{ pid }}" hidden>Abstract</button></li>{% endif %}
+    {%- if l.pdf %}<li><a href="{% include link-url.html url=l.pdf %}">PDF</a></li>{% endif %}
+    {%- if doi != "" %}<li><a href="https://doi.org/{{ doi }}">DOI</a></li>{% endif %}
+    {%- if l.arxiv %}<li><a href="{{ l.arxiv }}">arXiv</a></li>{% endif %}
+    {%- if l.url %}<li><a href="{{ l.url }}">Paper</a></li>{% endif %}
+    {%- if l.code %}<li><a href="{{ l.code }}">Code</a></li>{% endif %}
+    {%- if l.project %}<li><a href="{{ l.project }}">Project</a></li>{% endif %}
+    {%- if l.slides %}<li><a href="{% include link-url.html url=l.slides %}">Slides</a></li>{% endif %}
+    {%- if l.poster %}<li><a href="{% include link-url.html url=l.poster %}">Poster</a></li>{% endif %}
+    {%- if l.video %}<li><a href="{{ l.video }}">Video</a></li>{% endif %}
+    <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="bib-{{ pid }}" hidden>BibTeX</button></li>
+    {%- if site.citations.dimensions and metric_doi != "" %}<li class="dimensions"><span class="__dimensions_badge_embed__" data-doi="{{ metric_doi }}" data-style="small_rectangle" data-legend="hover-right" data-hide-zero-citations="true"></span></li>{% endif %}
+  </ul>
+  {%- if p.abstract %}
+  <div class="pub-panel pub-abstract" id="abs-{{ pid }}" hidden>
+    <p>{{ p.abstract | strip }}</p>
+  </div>
+  {%- endif %}
+  <div class="pub-panel pub-bibtex" id="bib-{{ pid }}" hidden>
+    {%- capture bib %}{% include bibtex.html pub=p %}{% endcapture %}
+    <pre><code>{{ bib | escape }}</code></pre>
+    <button type="button" class="copy-bibtex">Copy</button>
+  </div>
+</article>

@@ -1,0 +1,38 @@
+# Word cloud on the home page. It is built from the titles of all published papers
+# in publications.yml, so it updates by itself when papers are added.
+#
+# max_words: how many words to show
+# min_count: a word must appear in at least this many titles
+# stopwords: words that are left out (lowercase)
+# merge:     spellings that should count as one word (lowercase; left side becomes right side)
+#
+# Example additions:
+#   stopwords: [..., survey]
+#   merge:
+#     segmentations: segmentation
+
+max_words: 42
+min_count: 2
+
+stopwords: [a, an, and, are, as, at, be, by, for, from, how, in, into, is, its, of, on, or, the, to,
+  towards, toward, through, via, with, without, using, based, novel, new, approach, approaches,
+  framework, method, methods, technique, scheme, effective, partially, joint, online, validation,
+  raw, rate, free, meta, priors, design]
+
+merge:
+  reidentification: re-identification
+  re-id: re-identification
+  reid: re-identification
+  images: image
+  videos: video
+  networks: network
+  models: model
+  filters: filter
+  filtering: filter
+  attacks: attack
+  defence: defense
+  forensic: forensics
+  anti-forensic: anti-forensics
+  compressed: compression
+  generative: generation
+  trajectories: trajectory

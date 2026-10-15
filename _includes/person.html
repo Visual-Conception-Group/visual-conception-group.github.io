@@ -1,0 +1,28 @@
+{%- comment -%} Team member card. Usage: {% include person.html person=p layout="card" %} {%- endcomment -%}
+{%- assign m = include.person -%}
+
+<article class="person person-{{ include.layout }}" id="{{ m.name | slugify }}">
+  {%- assign eager = false -%}{%- if include.layout == "lead" -%}{%- assign eager = true -%}{%- endif %}
+  <div class="person-photo">{% include avatar.html person=m alt=m.name eager=eager %}</div>
+  <div class="person-body">
+    <h4 class="person-name">{% if m.url %}<a href="{{ m.url }}">{{ m.name }}</a>{% else %}{{ m.name }}{% endif %}</h4>
+    <p class="person-role">{% include role-label.html person=m %}</p>
+    {%- if m.thesis %}<p class="person-thesis"><span>Thesis</span> {{ m.thesis }}</p>{% endif %}
+    {%- if m.note %}<p class="person-note">{{ m.note }}</p>{% endif %}
+    {%- if m.now %}<p class="person-now"><span>Now</span> {{ m.now }}</p>{% endif %}
+    {%- if m.education and m.status == "current" %}
+    <ul class="person-edu">
+      {%- for e in m.education %}<li>{{ e }}</li>{% endfor %}
+    </ul>
+    {%- endif %}
+    {%- if m.email or m.scholar %}
+    {%- if include.layout == "lead" or m.scholar %}
+    <p class="person-contact">
+      {%- if include.layout == "lead" and m.email %}<a href="mailto:{{ m.email }}">{{ m.email }}</a>{% endif %}
+      {%- if include.layout == "lead" and m.email and m.scholar %} · {% endif %}
+      {%- if m.scholar %}<a href="{{ m.scholar }}">Google Scholar</a>{% endif -%}
+    </p>
+    {%- endif %}
+    {%- endif %}
+  </div>
+</article>

@@ -1,0 +1,29 @@
+{%- comment -%} schema.org data for the home page: the lab as a research organisation. {%- endcomment -%}
+{%- assign pi = site.data.people | where: "pi", true | first -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchOrganization",
+  "name": {{ site.title | jsonify }},
+  "alternateName": {{ site.short_title | jsonify }},
+  "url": {{ "/" | absolute_url | jsonify }},
+  "logo": {{ site.logo | absolute_url | jsonify }},
+  "image": {{ "/assets/img/og-image.jpg" | absolute_url | jsonify }},
+  "description": {{ site.description | strip | jsonify }},
+  "email": {{ site.contact.email | jsonify }},
+  "parentOrganization": { "@type": "CollegeOrUniversity", "name": {{ site.institute.name | jsonify }}, "url": {{ site.institute.url | jsonify }} },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": {{ site.contact.postal.street | jsonify }},
+    "addressLocality": {{ site.contact.postal.locality | jsonify }},
+    "addressRegion": {{ site.contact.postal.region | jsonify }},
+    "postalCode": {{ site.contact.postal.postal_code | jsonify }},
+    "addressCountry": {{ site.contact.postal.country | jsonify }}
+  },
+  "knowsAbout": [{% for t in site.data.topics %}{{ t.title | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}],
+  {%- if pi %}
+  "founder": { "@type": "Person", "name": {{ pi.name | jsonify }}, "jobTitle": {{ pi.title | jsonify }}{% if pi.scholar %}, "sameAs": [{{ pi.scholar | jsonify }}]{% endif %} },
+  {%- endif %}
+  "sameAs": [{{ site.links.github | jsonify }}]
+}
+</script>

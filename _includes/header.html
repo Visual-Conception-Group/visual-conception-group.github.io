@@ -1,27 +1,33 @@
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-	<div class="navbar-header">
-	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-		<span class="sr-only">Toggle navigation</span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-	  </button>
-	
-    <a class="navbar-brand" href="{{ site.url }}{{ site.baseurl }}/">Visual Conception Group @ IIIT Delhi</a>
-	</div>
-	<div class="collapse navbar-collapse" id="navbar-collapse-1">
-	  <ul class="nav navbar-nav navbar-right">
-		<li><a href="{{ site.url }}{{ site.baseurl }}/">About Us</a></li>
-		<li><a href="{{ site.url }}{{ site.baseurl }}/team">Team</a></li>
-		<!-- <li><a href="{{ site.url }}{{ site.baseurl }}/vacancies">Vacancies</a></li> -->
-		<li><a href="{{ site.url }}{{ site.baseurl }}/publications">Research</a></li>
-		<!-- <li><a href="{{ site.url }}{{ site.baseurl }}/research">Research</a></li> -->
-		<li><a href="{{ site.url }}{{ site.baseurl }}/sponsored_projects">Sponsored Projects</a></li>
-
-		<li><a href="{{ site.url }}{{ site.baseurl }}/resources">Resources</a></li>
-		<!-- <li><a href="{{ site.url }}{{ site.baseurl }}/pictures">(Pics)</a></li> -->
-	  </ul>
-	</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }}, home">
+      <span class="brand-mark" aria-hidden="true">{{ site.short_title }}</span>
+      <span class="brand-name">{{ site.title }}<small>{{ site.institute.short }}</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      {%- for item in site.data.navigation %}
+      {%- if item.links %}
+      {%- comment -%} Drop-down menu: works without JavaScript; assets/js/menu.js closes it on Esc or a click elsewhere. {%- endcomment %}
+      <details class="nav-menu">
+        <summary>{{ item.title }}</summary>
+        <ul>
+          {%- for link in item.links %}
+          {%- assign head4 = link.url | slice: 0, 4 %}
+          <li><a href="{% include link-url.html url=link.url %}">{{ link.title }}{% if head4 == "http" %}<span class="ext" aria-hidden="true"> ↗</span>{% endif %}</a></li>
+          {%- endfor %}
+        </ul>
+      </details>
+      {%- else %}
+      {%- assign active = false -%}
+      {%- if page.url == item.url -%}{%- assign active = true -%}{%- endif %}
+      <a href="{{ item.url | relative_url }}"{% if active %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      {%- endif %}
+      {%- endfor %}
+    </nav>
+    {%- comment -%} Light/dark switch: assets/css/main.css keeps its space; assets/js/theme.js shows it and makes it work. {%- endcomment %}
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Dark theme" aria-pressed="false" hidden>
+      <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
   </div>
-</div>
+</header>

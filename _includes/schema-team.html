@@ -1,0 +1,31 @@
+{%- comment -%} schema.org data for the Team page: current members and alumni. {%- endcomment -%}
+{%- assign current = site.data.people | where: "status", "current" -%}
+{%- assign alumni = site.data.people | where: "status", "alumni" -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchOrganization",
+  "name": {{ site.title | jsonify }},
+  "url": {{ "/" | absolute_url | jsonify }},
+  "parentOrganization": { "@type": "CollegeOrUniversity", "name": {{ site.institute.name | jsonify }}, "url": {{ site.institute.url | jsonify }} },
+  "member": [
+    {%- for m in current %}
+    {
+      "@type": "Person",
+      "name": {{ m.name | jsonify }},
+      {%- capture role %}{% include role-label.html person=m short=true %}{% endcapture %}
+      "jobTitle": {{ role | strip | jsonify }}
+      {%- if m.photo %},
+      "image": {{ m.photo | prepend: "/images/teampic/" | absolute_url | jsonify }}{% endif %}
+      {%- if m.url or m.scholar %},
+      "sameAs": [{% if m.url %}{{ m.url | jsonify }}{% endif %}{% if m.url and m.scholar %}, {% endif %}{% if m.scholar %}{{ m.scholar | jsonify }}{% endif %}]{% endif %}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "alumni": [
+    {%- for m in alumni %}
+    { "@type": "Person", "name": {{ m.name | jsonify }}{% if m.photo %}, "image": {{ m.photo | prepend: "/images/teampic/" | absolute_url | jsonify }}{% endif %}{% if m.url %}, "sameAs": [{{ m.url | jsonify }}]{% endif %} }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>

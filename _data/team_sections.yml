@@ -1,0 +1,76 @@
+# Sections of the Team page, in order. Each section lists people from people.yml
+# with the given role and status. Current members are shown first, then alumni.
+# Sections with nobody in them are hidden automatically.
+# layout: lead (large, for faculty), card (photo + details) or list (compact, names and theses).
+#
+# - title: Section heading
+#   id: anchor-id                # used in the page's jump links
+#   role: phd                    # matches role in people.yml
+#   status: current              # current | alumni
+#   layout: card
+
+- title: Faculty
+  id: faculty
+  role: faculty
+  status: current
+  layout: lead
+
+- title: Postdocs
+  id: postdocs
+  role: postdoc
+  status: current
+  layout: card
+
+- title: PhD students
+  id: phd
+  role: phd
+  status: current
+  layout: card
+
+- title: Master's students
+  id: masters
+  role: masters
+  status: current
+  layout: card
+
+- title: Bachelor's students
+  id: bachelors
+  role: bachelors
+  status: current
+  layout: card
+
+- title: Research assistants
+  id: ra
+  role: ra
+  status: current
+  layout: card
+
+- title: Postdocs
+  id: postdocs-alumni
+  role: postdoc
+  status: alumni
+  layout: list
+
+- title: PhD
+  id: phd-alumni
+  role: phd
+  status: alumni
+  layout: card
+
+- title: Master's
+  id: masters-alumni
+  role: masters
+  status: alumni
+  layout: list
+
+- title: Bachelor's
+  id: bachelors-alumni
+  role: bachelors
+  status: alumni
+  layout: list
+
+- title: Research assistants
+  id: ra-alumni
+  role: ra
+  status: alumni
+  layout: list

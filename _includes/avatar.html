@@ -1,0 +1,12 @@
+{%- comment -%}
+  Photo, or initials when there is no photo. Usage: {% include avatar.html person=p alt=p.name eager=false %}
+  alt: leave it out when the person's name is right next to the photo inside the same link.
+  eager: true for a photo that is visible as soon as the page opens (loads it first instead of lazily).
+{%- endcomment -%}
+{%- assign person = include.person -%}
+{%- if person.photo -%}
+<img class="avatar" src="{{ person.photo | prepend: '/images/teampic/' | relative_url }}" alt="{{ include.alt | escape }}" {% if include.eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} width="320" height="320">
+{%- else -%}
+{%- assign parts = person.name | split: " " -%}
+<span class="avatar avatar-initials" aria-hidden="true">{{ parts.first | slice: 0 }}{% if parts.size > 1 %}{{ parts.last | slice: 0 }}{% endif %}</span>
+{%- endif -%}
