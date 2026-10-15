@@ -56,13 +56,10 @@ hero:
   eyebrow: Visual Conception Group · IIIT Delhi
   headline: Teaching machines where to *look*, and when not to trust what they see.
   intro: >-
-    We develop methods that enable machines to recognise, understand and generate visual
-    content. Our research connects visual recognition, generative modelling and adversarial
-    robustness, advancing how vision systems interpret the world and how reliably they operate.
-    Recent work explores diffusion and flow models for text-driven image editing,
-    reference-guided generation and relighting. Our broader interests include person and
-    vehicle re-identification, adversarial attacks and defenses, vision–language learning and
-    multimedia forensics.
+    We study visual recognition, generation and robustness. Our recent work explores diffusion
+    and flow models for image editing, reference-guided generation and relighting. We also work
+    on person and vehicle re-identification, adversarial attacks and defenses, vision–language
+    learning and multimedia forensics.
 
 # How many items the home page shows.
 home:
