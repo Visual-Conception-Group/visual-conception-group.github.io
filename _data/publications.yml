@@ -159,6 +159,15 @@
   links:
     url: "https://bmvc2026.bmva.org/programme/accepted_papers/"
 
+- title: "GraphVG : Relationally Augmented Transformers for Compositional Visual Grounding"
+  authors: Aditya Moza, Rameshwar Mishra, A V Subramanyam
+  venue: BMVCW 2026, Workshop on Robust Vision in Synthetic Environments
+  short: BMVCw
+  year: 2026
+  month: Nov
+  type: conference
+  status: accepted
+
 - title: Do Prompts Guarantee Safety? Mitigating Toxicity from LLM Generations through Gradient Based Subspace Intervention
   authors: Himanshu Singh, Ziwei Xu, A V Subramanyam, Mohan Kankanhalli
   venue: "Findings of the Association for Computational Linguistics: EMNLP 2026"
